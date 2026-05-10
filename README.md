@@ -18,6 +18,20 @@ The project is built to answer a practical business question: how can a retail b
 
 ![Advanced analytics](docs/assets/03-advanced-analytics.png)
 
+## Python Analysis Preview
+
+### Customer Value Tiers
+
+![Customer value tiers](docs/assets/python-customer-value-tiers.svg)
+
+### Forecast Backtest
+
+![Forecast backtest](docs/assets/python-forecast-backtest.svg)
+
+### Mart Profiling
+
+![Mart profiling](docs/assets/python-mart-profiles.svg)
+
 ## What This Project Shows
 
 - Analytics engineering: raw, staging, dimensional, mart, quality, and monitoring layers

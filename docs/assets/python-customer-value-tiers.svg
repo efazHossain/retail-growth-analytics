@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="266" viewBox="0 0 920 266">
+  <style>
+    .bg { fill: #f4f7f9; }
+    .panel { fill: #ffffff; stroke: #d9e2ec; stroke-width: 1; }
+    .title { font: 700 26px Arial, sans-serif; fill: #16202a; }
+    .subtitle { font: 14px Arial, sans-serif; fill: #667085; }
+    .label { font: 14px Arial, sans-serif; fill: #16202a; }
+    .value { font: 700 13px Arial, sans-serif; fill: #16202a; }
+    .axis { font: 12px Arial, sans-serif; fill: #667085; }
+    .legend { font: 13px Arial, sans-serif; fill: #16202a; }
+    .track { fill: #e9eef4; }
+    .grid { stroke: #d9e2ec; stroke-width: 1; }
+  </style>
+  <rect width="920" height="266" class="bg" />
+  <rect x="14" y="14" width="892" height="238" rx="8" class="panel" />
+  <text x="34" y="48" class="title">Customer Value Tiers</text>
+  <text x="34" y="72" class="subtitle">Customers By Category</text>
+  
+            <text x="196" y="104" text-anchor="end" class="label">Repeat Low Value</text>
+            <rect x="210" y="86" width="640" height="16" rx="8" class="track" />
+            <rect x="210" y="86" width="6.0" height="16" rx="8" fill="#1d6fd6" />
+            <text x="226.03773584905662" y="100" class="value">10</text>
+            
+
+            <text x="196" y="150" text-anchor="end" class="label">Growth Potential</text>
+            <rect x="210" y="132" width="640" height="16" rx="8" class="track" />
+            <rect x="210" y="132" width="78.5" height="16" rx="8" fill="#1d6fd6" />
+            <text x="298.49056603773585" y="146" class="value">130</text>
+            
+
+            <text x="196" y="196" text-anchor="end" class="label">High Value Repeat</text>
+            <rect x="210" y="178" width="640" height="16" rx="8" class="track" />
+            <rect x="210" y="178" width="640.0" height="16" rx="8" fill="#1d6fd6" />
+            <text x="860.0" y="192" class="value">1,060</text>
+            
+</svg>

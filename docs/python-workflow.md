@@ -29,6 +29,9 @@ The Python scripts write outputs to `python/outputs/`:
 - `customer_segment_summary.csv`
 - `forecast_backtest.csv`
 - `forecast_backtest_summary.csv`
+- `docs/assets/python-customer-value-tiers.svg`
+- `docs/assets/python-forecast-backtest.svg`
+- `docs/assets/python-mart-profiles.svg`
 
 ## Why This Is Useful
 

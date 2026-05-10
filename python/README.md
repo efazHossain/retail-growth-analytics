@@ -29,3 +29,4 @@ The JavaScript pipeline builds the warehouse-style layers. The Python layer is f
 - segmenting customers by value and behavior
 - backtesting the simple revenue forecast idea
 - creating notebook-ready outputs
+- generating lightweight SVG visuals for README/project documentation
