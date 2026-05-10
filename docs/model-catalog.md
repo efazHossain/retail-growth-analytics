@@ -42,3 +42,10 @@ This catalog describes the main datasets produced by the project.
 ## Analysis Outputs
 
 `data/analysis_outputs/` contains CSV extracts aligned with the SQL files in `sql/analysis/`. These outputs make the analytical findings reproducible without requiring every machine to have a local database installed.
+
+## Operational Outputs
+
+| Model | Grain | Purpose |
+| --- | --- | --- |
+| `pipeline_runs.csv` | One row per local build run | Tracks row counts, curated model count, validation failures, anomaly alerts, and build status |
+| `latest_run.json` | One JSON object per latest run | Quick machine-readable summary of the most recent pipeline run |

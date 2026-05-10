@@ -31,6 +31,15 @@ The business marts can be used directly for dashboard pages when the goal is a f
 2. Profitability: category, channel, and regional margin comparison
 3. Customer Behavior: cohort retention and customer value tiers
 4. Forecast Tracking: forecast plan, backtest results, MAPE, MAE, and bias
+5. Monitoring: anomaly alert count, alert trend, and latest alert details
+
+## Suggested Power BI/Tableau Assets
+
+- Use `data/marts/` as the primary BI source folder.
+- Use `fact_orders` for order-level drilldowns.
+- Use business marts for summary pages when speed and simplicity matter.
+- Use `mart_anomaly_alerts` to build a monitoring page.
+- Use `python/outputs/customer_segment_summary.csv` to add customer value segmentation.
 
 ## DuckDB Example
 

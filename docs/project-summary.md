@@ -28,6 +28,8 @@ The project includes:
 - SQL-style analysis outputs
 - model catalog and lineage documentation
 - BI handoff notes
+- run history tracking
+- a dbt-style scaffold for future conversion
 
 ## Analytics Work
 
@@ -61,8 +63,8 @@ This project is intentionally built as more than a charting exercise. It shows t
 
 ## Future Improvements
 
-- Add dbt or dbt-style tests and docs.
+- Convert the dbt-style scaffold into executable dbt models.
 - Add anomaly trend visuals to the dashboard.
 - Add notebook charts from the Python analysis layer.
 - Connect the mart CSVs to Power BI or Tableau.
-- Add a lightweight orchestration log for each pipeline run.
+- Add runtime duration and row-count deltas to the run history.

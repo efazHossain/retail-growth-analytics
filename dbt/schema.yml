@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: Order-level fact table with customer and category keys.
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: category_id
+        tests:
+          - not_null
+
+  - name: dim_customers
+    description: Customer dimension with lifetime order, revenue, and profit metrics.
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: mart_anomaly_alerts
+    description: Rolling metric anomaly monitoring for revenue, margin, discounting, and fulfillment.
+    columns:
+      - name: month
+        tests:
+          - not_null
+      - name: alert_flag
+        tests:
+          - accepted_values:
+              values: ["alert", "normal"]

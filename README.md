@@ -1,5 +1,7 @@
 # Retail Growth Analytics
 
+[![Validate Analytics Pipeline](https://github.com/efazHossain/retail-growth-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/efazHossain/retail-growth-analytics/actions/workflows/ci.yml)
+
 Retail Growth Analytics is an ongoing personal data analytics and analytics engineering project. It simulates how raw retail transaction data moves through a trusted analytics workflow: generated source files, staging models, facts and dimensions, business marts, data quality checks, SQL-style analysis outputs, Python analysis, dashboard reporting, and written findings.
 
 The project is built to answer a practical business question: how can a retail business grow revenue while protecting margin?
@@ -50,12 +52,14 @@ data/
   quality/          Validation check outputs
   analysis_outputs/ Reproducible SQL-style analysis extracts
   warehouse/        CSV warehouse manifest for BI/database loading
+  run_history/      Pipeline run history and latest run summary
   processed/        Dashboard summary outputs and executive summary
 dashboard/          Local dashboard
 python/             Optional Python profiling, segmentation, and forecast scripts
 scripts/            Data generation and analysis pipeline
 sql/                SQL business questions and analysis queries
 docs/               Documentation, findings, screenshots, lineage, and handoff notes
+dbt/                dbt-style model and test scaffold for future conversion
 ```
 
 ## Quick Start
@@ -76,6 +80,7 @@ build marts
 validate data quality
 run SQL-style analysis outputs
 write dashboard summary
+record run history
 ```
 
 ## Optional Python Layer
@@ -106,6 +111,7 @@ Python outputs are written to `python/outputs/`.
 - `data/marts/mart_forecast_accuracy.csv`
 - `data/marts/mart_anomaly_alerts.csv`
 - `data/analysis_outputs/`
+- `data/run_history/pipeline_runs.csv`
 - `data/processed/summary.json`
 
 ## Documentation
@@ -113,15 +119,18 @@ Python outputs are written to `python/outputs/`.
 - [Project summary](docs/project-summary.md)
 - [Data model](docs/data-model.md)
 - [Model catalog](docs/model-catalog.md)
+- [Data dictionary](docs/data-dictionary.md)
 - [Lineage](docs/lineage.md)
 - [Metrics definition](docs/metrics-definition.md)
 - [Data quality](docs/data-quality.md)
 - [Anomaly detection](docs/anomaly-detection.md)
+- [Orchestration](docs/orchestration.md)
 - [Analytics questions](docs/analytics-questions.md)
 - [Findings](docs/findings.md)
 - [BI handoff](docs/bi-handoff.md)
 - [Dashboard screenshots](docs/dashboard-screenshots.md)
 - [Python workflow](docs/python-workflow.md)
+- [Python analysis report](docs/python-analysis-report.md)
 - [Project log](docs/project-log.md)
 
 ## Dashboard
@@ -143,6 +152,6 @@ The local dashboard includes:
 
 - Add notebook visuals from the Python layer.
 - Connect the mart CSVs to Power BI or Tableau.
-- Add dbt or dbt-style tests and docs.
+- Convert the dbt-style scaffold into a working dbt project.
 - Add anomaly trend visuals to the dashboard.
-- Add a lightweight orchestration log for each pipeline run.
+- Add richer orchestration metadata for runtime duration and row-level diffs.

@@ -1,0 +1,15 @@
+{
+  "run_id": "local-0001",
+  "run_sequence": 1,
+  "run_timestamp_utc": "local-run",
+  "build_status": "success",
+  "raw_orders": 13526,
+  "raw_customers": 1200,
+  "staging_orders": 13526,
+  "staging_customers": 1200,
+  "fact_orders": 13526,
+  "curated_model_count": 12,
+  "validation_checks": 10,
+  "validation_failures": 0,
+  "anomaly_alerts": 11
+}

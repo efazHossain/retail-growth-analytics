@@ -34,7 +34,12 @@ The SQL analysis is materialized into CSV outputs so findings are reproducible w
 
 The project now includes rolling anomaly detection for revenue, margin rate, discount rate, and fulfillment days. This adds a monitoring layer on top of validation: validation checks whether data is allowed, while anomaly monitoring checks whether metric movement deserves review.
 
+## Operational Phase
+
+The project now records pipeline run history, includes a GitHub Actions validation workflow, and has a dbt-style scaffold for a future warehouse conversion.
+
 ## Future Work
 
 - Add dbt itself if this project moves from a dependency-light local workflow into a formal warehouse workflow
 - Add anomaly trend visuals to the dashboard
+- Add runtime duration and row-count deltas to the run history

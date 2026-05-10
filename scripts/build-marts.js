@@ -103,7 +103,7 @@ writeJson(path.join(martsDir, "manifest.json"), {
   ]
 });
 
-console.log(`Built marts layer: ${factOrders.length} fact rows and ${11} analytical models.`);
+console.log(`Built marts layer: ${factOrders.length} fact rows and ${12} curated models.`);
 
 function summarize(rows, field) {
   return groupBy(

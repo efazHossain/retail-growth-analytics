@@ -6,7 +6,8 @@ const steps = [
   ["build marts", "scripts/build-marts.js"],
   ["validate data quality", "scripts/validate-data.js"],
   ["run SQL-style analysis", "scripts/run-sql-analysis.js"],
-  ["write dashboard summary", "scripts/analyze.js"]
+  ["write dashboard summary", "scripts/analyze.js"],
+  ["record run history", "scripts/record-run-history.js"]
 ];
 
 for (const [label, script] of steps) {

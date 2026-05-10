@@ -33,6 +33,8 @@ The Python scripts write outputs to `python/outputs/`:
 - `docs/assets/python-forecast-backtest.svg`
 - `docs/assets/python-mart-profiles.svg`
 
+See [Python Analysis Report](python-analysis-report.md) for the generated visual summary.
+
 ## Why This Is Useful
 
 The project separates production-style transformation logic from exploratory analysis. The modeled marts are created first, then Python reads those stable tables for profiling, segmentation, and forecast evaluation.
