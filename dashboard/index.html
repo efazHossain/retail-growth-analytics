@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Retail Growth Analytics</title>
+    <link rel="stylesheet" href="/dashboard/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Portfolio Analytics Case Study</p>
+        <h1>Retail Growth Analytics</h1>
+      </div>
+      <a href="/data/processed/executive-summary.md">Executive Summary</a>
+    </header>
+
+    <main>
+      <section class="kpis" id="kpis"></section>
+
+      <section class="grid">
+        <article>
+          <h2>Revenue Trend</h2>
+          <canvas id="trend" width="900" height="340" aria-label="Monthly revenue trend"></canvas>
+        </article>
+        <article>
+          <h2>Category Performance</h2>
+          <div class="table-wrap">
+            <table id="categories"></table>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article>
+          <h2>Channel Mix</h2>
+          <div id="channels" class="bars"></div>
+        </article>
+        <article>
+          <h2>Regional Margin</h2>
+          <div id="regions" class="bars"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/dashboard/main.js"></script>
+  </body>
+</html>

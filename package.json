@@ -1,0 +1,20 @@
+{
+  "name": "retail-growth-analytics",
+  "version": "1.0.0",
+  "description": "Recruiter-facing retail analytics portfolio project with reproducible data, KPI analysis, SQL questions, and a local dashboard.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node scripts/generate-data.js",
+    "analyze": "node scripts/analyze.js",
+    "build": "node scripts/generate-data.js && node scripts/analyze.js",
+    "start": "node dashboard/server.js"
+  },
+  "keywords": [
+    "data-analytics",
+    "portfolio",
+    "sql",
+    "dashboard",
+    "retail-analytics"
+  ]
+}

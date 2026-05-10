@@ -1,0 +1,252 @@
+{
+  "kpis": {
+    "orders": 13526,
+    "revenue": 4992744.96,
+    "profit": 1618850.89,
+    "average_order_value": 369.12,
+    "gross_margin_rate": 0.324,
+    "average_fulfillment_days": 3.5
+  },
+  "monthly": [
+    {
+      "month": "2024-01",
+      "orders": 520,
+      "revenue": 183928.24,
+      "profit": 60268.37,
+      "units": 1273
+    },
+    {
+      "month": "2024-02",
+      "orders": 544,
+      "revenue": 201279.28,
+      "profit": 65851.96,
+      "units": 1385
+    },
+    {
+      "month": "2024-03",
+      "orders": 568,
+      "revenue": 210784.05,
+      "profit": 68243.45,
+      "units": 1424
+    },
+    {
+      "month": "2024-04",
+      "orders": 592,
+      "revenue": 214283.59,
+      "profit": 69419.41,
+      "units": 1456
+    },
+    {
+      "month": "2024-05",
+      "orders": 616,
+      "revenue": 226304.33,
+      "profit": 73455.01,
+      "units": 1540
+    },
+    {
+      "month": "2024-06",
+      "orders": 640,
+      "revenue": 237670.85,
+      "profit": 78288.16,
+      "units": 1596
+    },
+    {
+      "month": "2024-07",
+      "orders": 664,
+      "revenue": 241108.93,
+      "profit": 77603.1,
+      "units": 1628
+    },
+    {
+      "month": "2024-08",
+      "orders": 688,
+      "revenue": 252355.8,
+      "profit": 81895.8,
+      "units": 1723
+    },
+    {
+      "month": "2024-09",
+      "orders": 712,
+      "revenue": 256716.8,
+      "profit": 83845.3,
+      "units": 1776
+    },
+    {
+      "month": "2024-10",
+      "orders": 736,
+      "revenue": 274973.76,
+      "profit": 88171.87,
+      "units": 1829
+    },
+    {
+      "month": "2024-11",
+      "orders": 1003,
+      "revenue": 372115.67,
+      "profit": 121912.07,
+      "units": 2501
+    },
+    {
+      "month": "2024-12",
+      "orders": 1035,
+      "revenue": 379058.84,
+      "profit": 123306.47,
+      "units": 2594
+    },
+    {
+      "month": "2025-01",
+      "orders": 808,
+      "revenue": 303013.61,
+      "profit": 97117.06,
+      "units": 2021
+    },
+    {
+      "month": "2025-02",
+      "orders": 832,
+      "revenue": 305906.66,
+      "profit": 99943.05,
+      "units": 2114
+    },
+    {
+      "month": "2025-03",
+      "orders": 856,
+      "revenue": 320902.28,
+      "profit": 102979.14,
+      "units": 2132
+    },
+    {
+      "month": "2025-04",
+      "orders": 880,
+      "revenue": 334642.02,
+      "profit": 107568.84,
+      "units": 2245
+    },
+    {
+      "month": "2025-05",
+      "orders": 904,
+      "revenue": 327104.22,
+      "profit": 105628.76,
+      "units": 2289
+    },
+    {
+      "month": "2025-06",
+      "orders": 928,
+      "revenue": 350596.03,
+      "profit": 113353.07,
+      "units": 2345
+    }
+  ],
+  "byCategory": [
+    {
+      "category": "Electronics",
+      "orders": 2764,
+      "revenue": 1654185.28,
+      "profit": 437348.28,
+      "units": 6912,
+      "avg_discount": 0.114,
+      "margin_rate": 0.264
+    },
+    {
+      "category": "Home Office",
+      "orders": 2754,
+      "revenue": 1111985.2,
+      "profit": 438670.59,
+      "units": 6876,
+      "avg_discount": 0.113,
+      "margin_rate": 0.394
+    },
+    {
+      "category": "Fitness",
+      "orders": 2678,
+      "revenue": 900720.37,
+      "profit": 301674.58,
+      "units": 6734,
+      "avg_discount": 0.112,
+      "margin_rate": 0.335
+    },
+    {
+      "category": "Travel",
+      "orders": 2628,
+      "revenue": 733928.25,
+      "profit": 231455.49,
+      "units": 6617,
+      "avg_discount": 0.113,
+      "margin_rate": 0.315
+    },
+    {
+      "category": "Kitchen",
+      "orders": 2702,
+      "revenue": 591925.86,
+      "profit": 209701.95,
+      "units": 6732,
+      "avg_discount": 0.115,
+      "margin_rate": 0.354
+    }
+  ],
+  "byChannel": [
+    {
+      "channel": "Online",
+      "orders": 4567,
+      "revenue": 1764767.84,
+      "profit": 570363.01,
+      "units": 11440,
+      "avg_discount": 0.08,
+      "margin_rate": 0.323
+    },
+    {
+      "channel": "Retail Store",
+      "orders": 4479,
+      "revenue": 1700448.37,
+      "profit": 554233.46,
+      "units": 11186,
+      "avg_discount": 0.08,
+      "margin_rate": 0.326
+    },
+    {
+      "channel": "Marketplace",
+      "orders": 4480,
+      "revenue": 1527528.75,
+      "profit": 494254.42,
+      "units": 11245,
+      "avg_discount": 0.18,
+      "margin_rate": 0.324
+    }
+  ],
+  "byRegion": [
+    {
+      "region": "Midwest",
+      "orders": 3548,
+      "revenue": 1310206.31,
+      "profit": 422009.3,
+      "units": 8804,
+      "avg_discount": 0.114,
+      "margin_rate": 0.322
+    },
+    {
+      "region": "West",
+      "orders": 3458,
+      "revenue": 1282856.95,
+      "profit": 414149.83,
+      "units": 8726,
+      "avg_discount": 0.112,
+      "margin_rate": 0.323
+    },
+    {
+      "region": "South",
+      "orders": 3516,
+      "revenue": 1281475.62,
+      "profit": 418915.33,
+      "units": 8731,
+      "avg_discount": 0.115,
+      "margin_rate": 0.327
+    },
+    {
+      "region": "Northeast",
+      "orders": 3004,
+      "revenue": 1118206.08,
+      "profit": 363776.43,
+      "units": 7610,
+      "avg_discount": 0.112,
+      "margin_rate": 0.325
+    }
+  ]
+}
