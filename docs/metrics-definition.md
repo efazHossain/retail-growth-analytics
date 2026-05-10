@@ -31,4 +31,15 @@ This file defines the main metrics used across the project so the dashboard, SQL
 
 `mart_revenue_forecast` uses a simple six-month linear trend. It is included as a learning and planning exercise, not as a production-grade forecasting model.
 
-Future improvement: store forecast snapshots and compare them against actual monthly revenue after each month closes.
+## Forecast Accuracy Metrics
+
+| Metric | Definition |
+| --- | --- |
+| Forecast Error | Actual revenue minus forecast revenue |
+| Absolute Error | Absolute value of forecast error |
+| Absolute Percentage Error | Absolute error divided by actual revenue |
+| Mean Absolute Error | Average absolute error across backtest months |
+| Mean Absolute Percentage Error | Average absolute percentage error across backtest months |
+| Average Forecast Bias | Average forecast error across backtest months |
+
+The backtest uses rolling six-month windows. For each month with enough history, the model trains on the prior six months and compares the next forecast with the known actual.

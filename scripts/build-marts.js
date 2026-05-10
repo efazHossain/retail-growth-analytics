@@ -70,6 +70,8 @@ const martRegionalMargin = summarize(orders, "region").sort((a, b) => a.margin_r
 const martCategoryPerformance = summarize(orders, "category").sort((a, b) => b.revenue - a.revenue);
 const martCohortRetention = buildCohortRetention(customers, orders);
 const martRevenueForecast = buildForecast(martMonthlyRevenue);
+const martForecastBacktest = buildForecastBacktest(martMonthlyRevenue);
+const martForecastAccuracy = summarizeForecastAccuracy(martForecastBacktest);
 
 writeCsv(path.join(martsDir, "dim_customers.csv"), dimCustomers);
 writeCsv(path.join(martsDir, "dim_categories.csv"), dimCategories);
@@ -80,6 +82,8 @@ writeCsv(path.join(martsDir, "mart_regional_margin.csv"), martRegionalMargin);
 writeCsv(path.join(martsDir, "mart_category_performance.csv"), martCategoryPerformance);
 writeCsv(path.join(martsDir, "mart_cohort_retention.csv"), martCohortRetention);
 writeCsv(path.join(martsDir, "mart_revenue_forecast.csv"), martRevenueForecast);
+writeCsv(path.join(martsDir, "mart_forecast_backtest.csv"), martForecastBacktest);
+writeCsv(path.join(martsDir, "mart_forecast_accuracy.csv"), martForecastAccuracy);
 writeJson(path.join(martsDir, "manifest.json"), {
   models: [
     "dim_customers",
@@ -90,11 +94,13 @@ writeJson(path.join(martsDir, "manifest.json"), {
     "mart_regional_margin",
     "mart_category_performance",
     "mart_cohort_retention",
-    "mart_revenue_forecast"
+    "mart_revenue_forecast",
+    "mart_forecast_backtest",
+    "mart_forecast_accuracy"
   ]
 });
 
-console.log(`Built marts layer: ${factOrders.length} fact rows and ${8} analytical models.`);
+console.log(`Built marts layer: ${factOrders.length} fact rows and ${10} analytical models.`);
 
 function summarize(rows, field) {
   return groupBy(
@@ -160,17 +166,12 @@ function buildCohortRetention(customerRows, orderRows) {
 
 function buildForecast(monthlyRows) {
   const recent = monthlyRows.slice(-6);
-  const xs = recent.map((_, index) => index + 1);
-  const ys = recent.map((row) => row.revenue);
-  const xAvg = average(xs.map((value) => ({ value })), "value");
-  const yAvg = average(ys.map((value) => ({ value })), "value");
-  const slope = xs.reduce((total, x, index) => total + (x - xAvg) * (ys[index] - yAvg), 0) / xs.reduce((total, x) => total + (x - xAvg) ** 2, 0);
-  const intercept = yAvg - slope * xAvg;
+  const { slope, intercept } = linearFit(recent.map((row) => row.revenue));
   const lastMonth = monthlyRows.at(-1).month;
 
   return Array.from({ length: 3 }, (_, index) => {
     const forecastMonth = addMonths(lastMonth, index + 1);
-    const forecastRevenue = intercept + slope * (xs.length + index + 1);
+    const forecastRevenue = intercept + slope * (recent.length + index + 1);
     return {
       month: forecastMonth,
       forecast_revenue: round(forecastRevenue),
@@ -178,6 +179,53 @@ function buildForecast(monthlyRows) {
       note: "Directional planning estimate, not a production forecast"
     };
   });
+}
+
+function buildForecastBacktest(monthlyRows) {
+  const rows = [];
+  for (let index = 6; index < monthlyRows.length; index += 1) {
+    const trainingWindow = monthlyRows.slice(index - 6, index);
+    const { slope, intercept } = linearFit(trainingWindow.map((row) => row.revenue));
+    const actual = monthlyRows[index].revenue;
+    const forecast = intercept + slope * (trainingWindow.length + 1);
+    rows.push({
+      month: monthlyRows[index].month,
+      training_start_month: trainingWindow[0].month,
+      training_end_month: trainingWindow.at(-1).month,
+      actual_revenue: round(actual),
+      forecast_revenue: round(forecast),
+      forecast_error: round(actual - forecast),
+      absolute_error: round(Math.abs(actual - forecast)),
+      absolute_percentage_error: round(Math.abs(actual - forecast) / actual, 4),
+      method: "six_month_linear_trend"
+    });
+  }
+  return rows;
+}
+
+function summarizeForecastAccuracy(rows) {
+  const mae = rows.reduce((total, row) => total + row.absolute_error, 0) / rows.length;
+  const mape = rows.reduce((total, row) => total + row.absolute_percentage_error, 0) / rows.length;
+  const bias = rows.reduce((total, row) => total + row.forecast_error, 0) / rows.length;
+  return [
+    {
+      method: "six_month_linear_trend",
+      backtest_months: rows.length,
+      mean_absolute_error: round(mae),
+      mean_absolute_percentage_error: round(mape, 4),
+      average_forecast_bias: round(bias),
+      note: "Backtest uses rolling six-month windows against known monthly revenue."
+    }
+  ];
+}
+
+function linearFit(values) {
+  const xs = values.map((_, index) => index + 1);
+  const xAvg = average(xs.map((value) => ({ value })), "value");
+  const yAvg = average(values.map((value) => ({ value })), "value");
+  const slope = xs.reduce((total, x, index) => total + (x - xAvg) * (values[index] - yAvg), 0) / xs.reduce((total, x) => total + (x - xAvg) ** 2, 0);
+  const intercept = yAvg - slope * xAvg;
+  return { slope, intercept };
 }
 
 function addMonths(month, offset) {

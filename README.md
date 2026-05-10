@@ -70,13 +70,15 @@ python python/run_all.py
 - [Metrics definition](docs/metrics-definition.md)
 - [Data quality](docs/data-quality.md)
 - [Analytics questions](docs/analytics-questions.md)
+- [Findings](docs/findings.md)
+- [BI handoff](docs/bi-handoff.md)
+- [Dashboard screenshots](docs/dashboard-screenshots.md)
 - [Python workflow](docs/python-workflow.md)
 - [Project log](docs/project-log.md)
 
 ## Next Improvements
 
-- Add a Power BI or Tableau version of the dashboard.
-- Load the CSVs into SQLite or DuckDB and save query outputs.
 - Add screenshots and a project journal describing each major analysis update.
-- Add forecast accuracy tracking once future actuals are available.
 - Extend the Python layer with notebook visuals and more advanced customer segmentation.
+- Add dbt-style model docs and lineage diagrams.
+- Add anomaly detection for sudden margin, discount, or fulfillment changes.

@@ -10,6 +10,7 @@
     "mart": "node scripts/build-marts.js",
     "validate": "node scripts/validate-data.js",
     "analyze": "node scripts/analyze.js",
+    "sql": "node scripts/run-sql-analysis.js",
     "build": "node scripts/build.js",
     "start": "node dashboard/server.js"
   },

@@ -1,6 +1,4 @@
--- Lightweight forecast governance pattern.
--- In a production warehouse, this would compare stored forecast snapshots
--- against future actuals after each month closes.
+-- Current forward-looking revenue forecast.
 
 SELECT
   month,

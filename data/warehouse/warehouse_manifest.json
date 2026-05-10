@@ -1,0 +1,26 @@
+{
+  "note": "Local CSV-backed warehouse manifest. Load data/marts/*.csv into DuckDB, SQLite, BigQuery, Snowflake, or Power BI.",
+  "source_marts": [
+    "dim_customers",
+    "dim_categories",
+    "fact_orders",
+    "mart_monthly_revenue",
+    "mart_channel_performance",
+    "mart_regional_margin",
+    "mart_category_performance",
+    "mart_cohort_retention",
+    "mart_revenue_forecast",
+    "mart_forecast_backtest",
+    "mart_forecast_accuracy"
+  ],
+  "analysis_outputs": [
+    "01_revenue_trends.csv",
+    "02_category_margin_analysis.csv",
+    "02_regional_margin_analysis.csv",
+    "03_channel_discounting.csv",
+    "04_cohort_retention.csv",
+    "05_forecast_plan.csv",
+    "06_forecast_backtest.csv",
+    "06_forecast_accuracy_summary.csv"
+  ]
+}

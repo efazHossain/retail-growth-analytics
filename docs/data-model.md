@@ -38,6 +38,8 @@ The mart layer contains reusable business-ready models.
 - `mart_category_performance`: category-level performance table
 - `mart_cohort_retention`: customer cohort retention table
 - `mart_revenue_forecast`: simple trend-based forecast table
+- `mart_forecast_backtest`: rolling forecast versus actual revenue comparison
+- `mart_forecast_accuracy`: forecast accuracy summary metrics
 
 Marts are built by `node scripts/build-marts.js`.
 

@@ -1,0 +1,2 @@
+method,backtest_months,mean_absolute_error,mean_absolute_percentage_error,average_forecast_bias,note
+six_month_linear_trend,12,34783.08,0.1065,-174.26,Backtest uses rolling six-month windows against known monthly revenue.

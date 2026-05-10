@@ -17,6 +17,7 @@ function renderDashboard(data) {
   renderCohorts(data.cohortRetention);
   renderQuality(data.validation);
   renderForecast(data.revenueForecast);
+  renderForecastAccuracy(data.forecastAccuracy);
 }
 
 function renderKpis(kpis) {
@@ -133,4 +134,16 @@ function renderForecast(rows) {
       <div class="bar-track"><div class="bar-fill forecast" style="width:${(row.forecast_revenue / max) * 100}%"></div></div>
     </div>
   `).join("");
+}
+
+function renderForecastAccuracy(rows) {
+  const row = rows[0];
+  document.querySelector("#forecastAccuracy").innerHTML = `
+    <div class="quality-score"><strong>${percent.format(row.mean_absolute_percentage_error)}</strong><span>MAPE</span></div>
+    <ul>
+      <li><span>Backtest months</span><strong>${row.backtest_months}</strong></li>
+      <li><span>Mean absolute error</span><strong>${currency.format(row.mean_absolute_error)}</strong></li>
+      <li><span>Average bias</span><strong>${currency.format(row.average_forecast_bias)}</strong></li>
+    </ul>
+  `;
 }

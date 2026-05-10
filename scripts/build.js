@@ -5,6 +5,7 @@ const steps = [
   ["build staging models", "scripts/build-staging.js"],
   ["build marts", "scripts/build-marts.js"],
   ["validate data quality", "scripts/validate-data.js"],
+  ["run SQL-style analysis", "scripts/run-sql-analysis.js"],
   ["write dashboard summary", "scripts/analyze.js"]
 ];
 
