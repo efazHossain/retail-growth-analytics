@@ -1,12 +1,12 @@
-# Case Study: Retail Growth Analytics
+# Project Notes: Retail Growth Analytics
 
 ## Business Problem
 
 The company wants to grow revenue without sacrificing margin. Leadership needs a practical view of which categories, channels, and regions are driving performance, plus a clear recommendation on where to focus next.
 
-## Analyst Role
+## Current Approach
 
-I built an end-to-end analytics workflow that turns transaction-level order data into executive-ready insights. The project includes raw CSV data, a repeatable transformation script, SQL business questions, KPI summaries, and a local dashboard.
+This project uses an end-to-end analytics workflow that turns transaction-level order data into repeatable summaries and visual checks. It includes raw CSV data, a transformation script, SQL business questions, KPI summaries, and a local dashboard.
 
 ## Skills Demonstrated
 

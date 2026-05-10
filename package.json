@@ -1,7 +1,7 @@
 {
   "name": "retail-growth-analytics",
   "version": "1.0.0",
-  "description": "Recruiter-facing retail analytics portfolio project with reproducible data, KPI analysis, SQL questions, and a local dashboard.",
+  "description": "An ongoing retail growth analytics project with reproducible data, KPI analysis, SQL questions, and a local dashboard.",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "data-analytics",
-    "portfolio",
+    "personal-project",
     "sql",
     "dashboard",
     "retail-analytics"
