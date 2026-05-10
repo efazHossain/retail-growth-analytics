@@ -25,7 +25,6 @@ const checks = [
 const failed = checks.filter((check) => check.status === "fail");
 writeCsv(path.join(qualityDir, "validation_results.csv"), checks);
 writeJson(path.join(qualityDir, "validation_summary.json"), {
-  generated_at: new Date().toISOString(),
   checks: checks.length,
   passed: checks.length - failed.length,
   failed: failed.length

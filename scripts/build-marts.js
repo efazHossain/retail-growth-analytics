@@ -81,7 +81,6 @@ writeCsv(path.join(martsDir, "mart_category_performance.csv"), martCategoryPerfo
 writeCsv(path.join(martsDir, "mart_cohort_retention.csv"), martCohortRetention);
 writeCsv(path.join(martsDir, "mart_revenue_forecast.csv"), martRevenueForecast);
 writeJson(path.join(martsDir, "manifest.json"), {
-  generated_at: new Date().toISOString(),
   models: [
     "dim_customers",
     "dim_categories",
