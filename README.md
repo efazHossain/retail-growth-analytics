@@ -59,6 +59,7 @@ node scripts/build.js
 - [Metrics definition](docs/metrics-definition.md)
 - [Data quality](docs/data-quality.md)
 - [Analytics questions](docs/analytics-questions.md)
+- [Python workflow](docs/python-workflow.md)
 - [Project log](docs/project-log.md)
 
 ## Next Improvements
@@ -67,3 +68,4 @@ node scripts/build.js
 - Load the CSVs into SQLite or DuckDB and save query outputs.
 - Add screenshots and a project journal describing each major analysis update.
 - Add forecast accuracy tracking once future actuals are available.
+- Extend the Python layer with notebook visuals and more advanced customer segmentation.
