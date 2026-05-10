@@ -4,6 +4,20 @@ Retail Growth Analytics is an ongoing personal data analytics and analytics engi
 
 The project is built to answer a practical business question: how can a retail business grow revenue while protecting margin?
 
+## Dashboard Preview
+
+### Overview
+
+![Dashboard overview](docs/assets/01-dashboard-overview.png)
+
+### Performance Views
+
+![Performance views](docs/assets/02-performance-views.png)
+
+### Advanced Analytics
+
+![Advanced analytics](docs/assets/03-advanced-analytics.png)
+
 ## What This Project Shows
 
 - Analytics engineering: raw, staging, dimensional, mart, quality, and monitoring layers
