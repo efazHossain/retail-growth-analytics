@@ -45,17 +45,13 @@ node scripts/build.js
 
 ## Optional Python Layer
 
-If you use Python through WSL, run:
-
-```bash
-cd /mnt/c/Users/efazh/Projects/analytics-project
-bash scripts/run-python.sh
-```
-
-From PowerShell, you can call the WSL helper:
+If you want to run the optional Python analysis layer:
 
 ```powershell
-.\scripts\run-python-wsl.ps1
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e .
+python python/run_all.py
 ```
 
 ## What This Project Covers

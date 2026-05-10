@@ -6,15 +6,6 @@ The main project build still works with Node because Python is not available on 
 
 ## Setup
 
-From WSL:
-
-```bash
-cd /mnt/c/Users/efazh/Projects/analytics-project
-bash scripts/run-python.sh
-```
-
-Manual Windows setup:
-
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1

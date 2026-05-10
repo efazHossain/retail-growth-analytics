@@ -11,27 +11,12 @@ The Python layer is optional and is meant for deeper analytical work after the w
 
 ## Recommended Flow
 
-From WSL:
-
-```bash
-cd /mnt/c/Users/efazh/Projects/analytics-project
-bash scripts/run-python.sh
-```
-
-Or manually:
-
 ```powershell
 node scripts/build.js
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -e .
 python python/run_all.py
-```
-
-From PowerShell, if WSL is configured:
-
-```powershell
-.\scripts\run-python-wsl.ps1
 ```
 
 ## Outputs
