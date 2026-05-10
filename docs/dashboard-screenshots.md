@@ -1,25 +1,44 @@
-# Dashboard Screenshot Checklist
+# Dashboard Screenshots
 
-Use this checklist when you capture dashboard screenshots for project updates.
+This page documents the dashboard views used to review the project over time.
 
-1. Run the full data build:
+## Dashboard Overview
+
+![Dashboard overview](assets/dashboard-overview.png)
+
+This view shows the top-level KPI cards, monthly revenue trend, and category performance table.
+
+## Performance Views
+
+![Performance views](assets/dashboard-performance.png)
+
+This view compares channel revenue mix and regional margin performance.
+
+## Advanced Analytics
+
+![Advanced analytics](assets/dashboard-advanced.png)
+
+This view shows cohort retention, pipeline health checks, revenue forecast, and forecast accuracy.
+
+## Capture Checklist
+
+Run the dashboard locally:
 
 ```powershell
 node scripts/build.js
-```
-
-2. Start the dashboard:
-
-```powershell
 node dashboard/server.js
 ```
 
-3. Open `http://localhost:4173` and capture the overview screen.
-
-Recommended filename:
+Then open `http://localhost:4173` and save screenshots to:
 
 ```text
-docs/assets/dashboard-overview.png
+docs/assets/
 ```
 
-This keeps screenshots as project artifacts without adding machine-specific browser automation to the repo.
+Recommended filenames:
+
+```text
+dashboard-overview.png
+dashboard-performance.png
+dashboard-advanced.png
+```
