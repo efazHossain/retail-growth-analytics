@@ -1,13 +1,16 @@
 # Retail Growth Analytics
 
-This is an ongoing personal data analytics and analytics engineering project focused on retail growth, profitability, and operational performance. It turns transaction-style source data into staging models, dimensional marts, KPI summaries, SQL analysis, a local dashboard, and written notes that can evolve over time.
+Retail Growth Analytics is an ongoing personal data analytics and analytics engineering project. It simulates how raw retail transaction data moves through a trusted analytics workflow: generated source files, staging models, facts and dimensions, business marts, data quality checks, SQL-style analysis outputs, Python analysis, dashboard reporting, and written findings.
 
-## Project Goals
+The project is built to answer a practical business question: how can a retail business grow revenue while protecting margin?
 
-- Explore how revenue growth, margin, discounting, and fulfillment performance interact.
-- Keep the workflow reproducible with generated source data and repeatable analysis scripts.
-- Practice turning raw order data into clear metrics, questions, charts, and recommendations.
-- Build the project in layers so new analyses, data quality checks, and modeled marts can be added over time.
+## What This Project Shows
+
+- Analytics engineering: raw, staging, dimensional, mart, quality, and monitoring layers
+- Data analytics: revenue trends, profitability, discounting, regional performance, and customer behavior
+- Forecasting discipline: directional revenue forecasts plus rolling backtests with MAE, MAPE, and bias
+- Monitoring: rolling anomaly alerts for revenue, margin, discounting, and fulfillment days
+- Communication: findings, metric definitions, model catalog, lineage, BI handoff notes, screenshots, and project summary
 
 ## Project Structure
 
@@ -17,30 +20,34 @@ data/
   staging/          Cleaned source-aligned models
   marts/            Facts, dimensions, and analysis-ready marts
   quality/          Validation check outputs
+  analysis_outputs/ Reproducible SQL-style analysis extracts
+  warehouse/        CSV warehouse manifest for BI/database loading
   processed/        Dashboard summary outputs and executive summary
 dashboard/          Local dashboard
+python/             Optional Python profiling, segmentation, and forecast scripts
 scripts/            Data generation and analysis pipeline
 sql/                SQL business questions and analysis queries
-docs/               Data model, metric definitions, quality notes, and project log
+docs/               Documentation, findings, screenshots, lineage, and handoff notes
 ```
 
 ## Quick Start
 
 ```powershell
-node scripts/generate-data.js
-node scripts/build-staging.js
-node scripts/build-marts.js
-node scripts/validate-data.js
-node scripts/analyze.js
+node scripts/build.js
 node dashboard/server.js
 ```
 
 Then open `http://localhost:4173`.
 
-You can also run the full pipeline with:
+The full build runs:
 
-```powershell
-node scripts/build.js
+```text
+generate raw data
+build staging models
+build marts
+validate data quality
+run SQL-style analysis outputs
+write dashboard summary
 ```
 
 ## Optional Python Layer
@@ -54,21 +61,34 @@ python -m pip install -e .
 python python/run_all.py
 ```
 
-## What This Project Covers
+Python outputs are written to `python/outputs/`.
 
-1. A reproducible analytics workflow using raw order and customer data.
-2. Staging models, dimensions, fact tables, and reusable analytical marts.
-3. KPIs for revenue, profit, average order value, margin rate, and fulfillment speed.
-4. Segmentation by month, product category, sales channel, and region.
-5. Data quality checks that make assumptions visible before data reaches the dashboard.
-6. Cohort retention and a lightweight revenue forecast as deeper analysis layers.
-7. Written findings and recommendations that can be refined as the project grows.
+## Core Outputs
+
+- `data/marts/fact_orders.csv`
+- `data/marts/dim_customers.csv`
+- `data/marts/dim_categories.csv`
+- `data/marts/mart_monthly_revenue.csv`
+- `data/marts/mart_channel_performance.csv`
+- `data/marts/mart_regional_margin.csv`
+- `data/marts/mart_category_performance.csv`
+- `data/marts/mart_cohort_retention.csv`
+- `data/marts/mart_revenue_forecast.csv`
+- `data/marts/mart_forecast_backtest.csv`
+- `data/marts/mart_forecast_accuracy.csv`
+- `data/marts/mart_anomaly_alerts.csv`
+- `data/analysis_outputs/`
+- `data/processed/summary.json`
 
 ## Documentation
 
+- [Project summary](docs/project-summary.md)
 - [Data model](docs/data-model.md)
+- [Model catalog](docs/model-catalog.md)
+- [Lineage](docs/lineage.md)
 - [Metrics definition](docs/metrics-definition.md)
 - [Data quality](docs/data-quality.md)
+- [Anomaly detection](docs/anomaly-detection.md)
 - [Analytics questions](docs/analytics-questions.md)
 - [Findings](docs/findings.md)
 - [BI handoff](docs/bi-handoff.md)
@@ -76,9 +96,25 @@ python python/run_all.py
 - [Python workflow](docs/python-workflow.md)
 - [Project log](docs/project-log.md)
 
+## Dashboard
+
+The local dashboard includes:
+
+- KPI cards for revenue, profit, average order value, and gross margin
+- monthly revenue trend
+- category performance
+- channel mix
+- regional margin
+- cohort retention
+- pipeline health
+- revenue forecast
+- forecast accuracy
+- anomaly alerts
+
 ## Next Improvements
 
-- Add screenshots and a project journal describing each major analysis update.
-- Extend the Python layer with notebook visuals and more advanced customer segmentation.
-- Add dbt-style model docs and lineage diagrams.
-- Add anomaly detection for sudden margin, discount, or fulfillment changes.
+- Add notebook visuals from the Python layer.
+- Connect the mart CSVs to Power BI or Tableau.
+- Add dbt or dbt-style tests and docs.
+- Add anomaly trend visuals to the dashboard.
+- Add a lightweight orchestration log for each pipeline run.

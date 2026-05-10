@@ -11,6 +11,7 @@ Revenue reached $4,992,745 across 13,526 orders, with a 32.4% gross margin rate 
 - Month-one cohort retention averages 45.9%, adding a customer behavior lens beyond basic sales reporting.
 - A simple six-month trend forecast estimates $355,219 in revenue for 2025-07.
 - The rolling forecast backtest has 10.7% MAPE across 12 months.
+- Rolling anomaly monitoring flagged 11 metric-month combinations across revenue, margin, discounting, and fulfillment.
 
 ## Recommended Actions
 
@@ -19,3 +20,4 @@ Revenue reached $4,992,745 across 13,526 orders, with a 32.4% gross margin rate 
 3. Track fulfillment days as an operational KPI because slower delivery can weaken repeat purchase behavior.
 4. Keep the trend forecast as a planning signal, but validate it against future actuals before using it for decisions.
 5. Track forecast accuracy monthly so planning assumptions improve over time.
+6. Review anomaly alerts after every build to catch unusual metric movement before it reaches reporting.

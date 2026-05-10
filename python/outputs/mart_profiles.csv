@@ -1,0 +1,10 @@
+table,rows,columns,missing_cells,duplicate_rows
+dim_customers,1200,10,0,0
+dim_categories,5,2,0,0
+fact_orders,13526,14,0,0
+mart_monthly_revenue,18,13,0,0
+mart_channel_performance,3,13,0,0
+mart_regional_margin,4,13,0,0
+mart_category_performance,5,13,0,0
+mart_cohort_retention,72,5,0,0
+mart_revenue_forecast,3,4,0,0

@@ -29,3 +29,9 @@ These are the business questions this project is built to explore.
 
 - What does a simple trend forecast suggest for the next three months?
 - How should forecasted revenue be compared with future actuals?
+
+## Monitoring
+
+- Which metrics moved outside their rolling baseline?
+- Are discount or fulfillment changes early warning signs for margin pressure?
+- Which anomaly alerts deserve deeper investigation?

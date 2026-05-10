@@ -17,6 +17,7 @@ const cohorts = numericRows(readCsv(path.join(martsDir, "mart_cohort_retention.c
 const forecast = numericRows(readCsv(path.join(martsDir, "mart_revenue_forecast.csv")));
 const forecastBacktest = numericRows(readCsv(path.join(martsDir, "mart_forecast_backtest.csv")));
 const forecastAccuracy = numericRows(readCsv(path.join(martsDir, "mart_forecast_accuracy.csv")));
+const anomalies = numericRows(readCsv(path.join(martsDir, "mart_anomaly_alerts.csv")));
 
 writeCsv(path.join(outputsDir, "01_revenue_trends.csv"), revenueTrends(monthly));
 writeCsv(path.join(outputsDir, "02_category_margin_analysis.csv"), categories.sort((a, b) => b.margin_rate - a.margin_rate));
@@ -26,6 +27,8 @@ writeCsv(path.join(outputsDir, "04_cohort_retention.csv"), cohorts.filter((row) 
 writeCsv(path.join(outputsDir, "05_forecast_plan.csv"), forecast);
 writeCsv(path.join(outputsDir, "06_forecast_backtest.csv"), forecastBacktest);
 writeCsv(path.join(outputsDir, "06_forecast_accuracy_summary.csv"), forecastAccuracy);
+writeCsv(path.join(outputsDir, "07_anomaly_alerts.csv"), anomalies.filter((row) => row.alert_flag === "alert"));
+writeCsv(path.join(outputsDir, "07_anomaly_monitoring_all.csv"), anomalies);
 
 writeJson(path.join(warehouseDir, "warehouse_manifest.json"), {
   note: "Local CSV-backed warehouse manifest. Load data/marts/*.csv into DuckDB, SQLite, BigQuery, Snowflake, or Power BI.",
@@ -40,7 +43,8 @@ writeJson(path.join(warehouseDir, "warehouse_manifest.json"), {
     "mart_cohort_retention",
     "mart_revenue_forecast",
     "mart_forecast_backtest",
-    "mart_forecast_accuracy"
+    "mart_forecast_accuracy",
+    "mart_anomaly_alerts"
   ],
   analysis_outputs: [
     "01_revenue_trends.csv",
@@ -50,7 +54,9 @@ writeJson(path.join(warehouseDir, "warehouse_manifest.json"), {
     "04_cohort_retention.csv",
     "05_forecast_plan.csv",
     "06_forecast_backtest.csv",
-    "06_forecast_accuracy_summary.csv"
+    "06_forecast_accuracy_summary.csv",
+    "07_anomaly_alerts.csv",
+    "07_anomaly_monitoring_all.csv"
   ]
 });
 
@@ -95,6 +101,8 @@ function writeFindings() {
   const monthOneRetention = cohorts.filter((row) => row.month_number === 1);
   const avgMonthOneRetention = monthOneRetention.reduce((total, row) => total + row.retention_rate, 0) / monthOneRetention.length;
   const accuracy = forecastAccuracy[0];
+  const alertCount = anomalies.filter((row) => row.alert_flag === "alert").length;
+  const mostRecentAlerts = anomalies.filter((row) => row.alert_flag === "alert").slice(-3);
 
   const markdown = `# Findings
 
@@ -119,6 +127,10 @@ Average month-one cohort retention is ${(avgMonthOneRetention * 100).toFixed(1)}
 ## Forecast Tracking
 
 The six-month linear trend forecast backtest has ${money(accuracy.mean_absolute_error)} MAE and ${(accuracy.mean_absolute_percentage_error * 100).toFixed(1)}% MAPE across ${accuracy.backtest_months} backtest months.
+
+## Anomaly Monitoring
+
+The rolling anomaly monitor flagged ${alertCount} metric-month combinations across revenue, margin, discounting, and fulfillment. ${mostRecentAlerts.length > 0 ? `Recent alerts include ${mostRecentAlerts.map((row) => `${row.metric_name} in ${row.month}`).join(", ")}.` : "No current metric-month combinations crossed the alert threshold."}
 
 ## Next Analysis Question
 

@@ -10,6 +10,7 @@
     "mart_cohort_retention",
     "mart_revenue_forecast",
     "mart_forecast_backtest",
-    "mart_forecast_accuracy"
+    "mart_forecast_accuracy",
+    "mart_anomaly_alerts"
   ]
 }

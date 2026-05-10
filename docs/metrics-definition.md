@@ -43,3 +43,13 @@ This file defines the main metrics used across the project so the dashboard, SQL
 | Average Forecast Bias | Average forecast error across backtest months |
 
 The backtest uses rolling six-month windows. For each month with enough history, the model trains on the prior six months and compares the next forecast with the known actual.
+
+## Anomaly Metrics
+
+| Metric | Definition |
+| --- | --- |
+| Baseline Average | Prior six-month average for the monitored metric |
+| Baseline Standard Deviation | Prior six-month standard deviation for the monitored metric |
+| Z-Score | Current value minus baseline average, divided by baseline standard deviation |
+| Alert Flag | `alert` when the z-score crosses the metric threshold, otherwise `normal` |
+| Severity | `medium` or `high` for alerts, otherwise `normal` |

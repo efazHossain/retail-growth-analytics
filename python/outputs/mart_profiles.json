@@ -1,0 +1,65 @@
+[
+  {
+    "table": "dim_customers",
+    "rows": 1200,
+    "columns": 10,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "dim_categories",
+    "rows": 5,
+    "columns": 2,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "fact_orders",
+    "rows": 13526,
+    "columns": 14,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "mart_monthly_revenue",
+    "rows": 18,
+    "columns": 13,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "mart_channel_performance",
+    "rows": 3,
+    "columns": 13,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "mart_regional_margin",
+    "rows": 4,
+    "columns": 13,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "mart_category_performance",
+    "rows": 5,
+    "columns": 13,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "mart_cohort_retention",
+    "rows": 72,
+    "columns": 5,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  },
+  {
+    "table": "mart_revenue_forecast",
+    "rows": 3,
+    "columns": 4,
+    "missing_cells": 0,
+    "duplicate_rows": 0
+  }
+]

@@ -40,6 +40,7 @@ The mart layer contains reusable business-ready models.
 - `mart_revenue_forecast`: simple trend-based forecast table
 - `mart_forecast_backtest`: rolling forecast versus actual revenue comparison
 - `mart_forecast_accuracy`: forecast accuracy summary metrics
+- `mart_anomaly_alerts`: rolling metric anomaly monitoring for revenue, margin, discounting, and fulfillment
 
 Marts are built by `node scripts/build-marts.js`.
 

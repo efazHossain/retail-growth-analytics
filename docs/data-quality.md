@@ -29,3 +29,7 @@ Outputs:
 ## Why This Matters
 
 The goal is not only to make charts. The goal is to build trust in the tables that feed those charts. These checks make data assumptions visible and help catch broken inputs before they reach the dashboard.
+
+## Monitoring Versus Validation
+
+Validation checks confirm whether data meets expected rules. Anomaly monitoring, documented in [Anomaly Detection](anomaly-detection.md), checks whether valid data moved in an unusual way.

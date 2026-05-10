@@ -72,6 +72,7 @@ const martCohortRetention = buildCohortRetention(customers, orders);
 const martRevenueForecast = buildForecast(martMonthlyRevenue);
 const martForecastBacktest = buildForecastBacktest(martMonthlyRevenue);
 const martForecastAccuracy = summarizeForecastAccuracy(martForecastBacktest);
+const martAnomalyAlerts = buildAnomalyAlerts(martMonthlyRevenue);
 
 writeCsv(path.join(martsDir, "dim_customers.csv"), dimCustomers);
 writeCsv(path.join(martsDir, "dim_categories.csv"), dimCategories);
@@ -84,6 +85,7 @@ writeCsv(path.join(martsDir, "mart_cohort_retention.csv"), martCohortRetention);
 writeCsv(path.join(martsDir, "mart_revenue_forecast.csv"), martRevenueForecast);
 writeCsv(path.join(martsDir, "mart_forecast_backtest.csv"), martForecastBacktest);
 writeCsv(path.join(martsDir, "mart_forecast_accuracy.csv"), martForecastAccuracy);
+writeCsv(path.join(martsDir, "mart_anomaly_alerts.csv"), martAnomalyAlerts);
 writeJson(path.join(martsDir, "manifest.json"), {
   models: [
     "dim_customers",
@@ -96,11 +98,12 @@ writeJson(path.join(martsDir, "manifest.json"), {
     "mart_cohort_retention",
     "mart_revenue_forecast",
     "mart_forecast_backtest",
-    "mart_forecast_accuracy"
+    "mart_forecast_accuracy",
+    "mart_anomaly_alerts"
   ]
 });
 
-console.log(`Built marts layer: ${factOrders.length} fact rows and ${10} analytical models.`);
+console.log(`Built marts layer: ${factOrders.length} fact rows and ${11} analytical models.`);
 
 function summarize(rows, field) {
   return groupBy(
@@ -217,6 +220,52 @@ function summarizeForecastAccuracy(rows) {
       note: "Backtest uses rolling six-month windows against known monthly revenue."
     }
   ];
+}
+
+function buildAnomalyAlerts(monthlyRows) {
+  const metrics = [
+    { field: "revenue", label: "Monthly revenue", direction: "two_sided", threshold: 1.6 },
+    { field: "margin_rate", label: "Gross margin rate", direction: "two_sided", threshold: 1.8 },
+    { field: "avg_discount_rate", label: "Average discount rate", direction: "high_only", threshold: 1.6 },
+    { field: "avg_fulfillment_days", label: "Average fulfillment days", direction: "high_only", threshold: 1.6 }
+  ];
+  const rows = [];
+
+  for (const metric of metrics) {
+    for (let index = 6; index < monthlyRows.length; index += 1) {
+      const baseline = monthlyRows.slice(index - 6, index).map((row) => row[metric.field]);
+      const baselineAverage = baseline.reduce((total, value) => total + value, 0) / baseline.length;
+      const standardDeviation = Math.sqrt(baseline.reduce((total, value) => total + (value - baselineAverage) ** 2, 0) / baseline.length);
+      const currentValue = monthlyRows[index][metric.field];
+      const zScore = standardDeviation === 0 ? 0 : (currentValue - baselineAverage) / standardDeviation;
+      const isAnomaly = metric.direction === "high_only" ? zScore >= metric.threshold : Math.abs(zScore) >= metric.threshold;
+      const severity = Math.abs(zScore) >= 2.5 ? "high" : isAnomaly ? "medium" : "normal";
+
+      rows.push({
+        month: monthlyRows[index].month,
+        metric_name: metric.label,
+        metric_field: metric.field,
+        current_value: round(currentValue, 4),
+        baseline_average: round(baselineAverage, 4),
+        baseline_stddev: round(standardDeviation, 4),
+        z_score: round(zScore, 4),
+        threshold: metric.threshold,
+        alert_flag: isAnomaly ? "alert" : "normal",
+        severity,
+        note: explainAnomaly(metric, currentValue, baselineAverage, zScore, isAnomaly)
+      });
+    }
+  }
+
+  return rows.sort((a, b) => a.month.localeCompare(b.month) || a.metric_name.localeCompare(b.metric_name));
+}
+
+function explainAnomaly(metric, currentValue, baselineAverage, zScore, isAnomaly) {
+  if (!isAnomaly) {
+    return "Within rolling six-month baseline range.";
+  }
+  const direction = currentValue > baselineAverage ? "above" : "below";
+  return `${metric.label} is ${direction} its rolling six-month baseline with z-score ${round(zScore, 2)}.`;
 }
 
 function linearFit(values) {

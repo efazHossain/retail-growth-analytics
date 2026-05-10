@@ -11,7 +11,8 @@
     "mart_cohort_retention",
     "mart_revenue_forecast",
     "mart_forecast_backtest",
-    "mart_forecast_accuracy"
+    "mart_forecast_accuracy",
+    "mart_anomaly_alerts"
   ],
   "analysis_outputs": [
     "01_revenue_trends.csv",
@@ -21,6 +22,8 @@
     "04_cohort_retention.csv",
     "05_forecast_plan.csv",
     "06_forecast_backtest.csv",
-    "06_forecast_accuracy_summary.csv"
+    "06_forecast_accuracy_summary.csv",
+    "07_anomaly_alerts.csv",
+    "07_anomaly_monitoring_all.csv"
   ]
 }

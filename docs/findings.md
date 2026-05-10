@@ -22,6 +22,10 @@ Average month-one cohort retention is 45.9%. This gives the project a customer b
 
 The six-month linear trend forecast backtest has $34,783 MAE and 10.7% MAPE across 12 backtest months.
 
+## Anomaly Monitoring
+
+The rolling anomaly monitor flagged 11 metric-month combinations across revenue, margin, discounting, and fulfillment. Recent alerts include Average fulfillment days in 2024-12, Monthly revenue in 2024-12, Average discount rate in 2025-02.
+
 ## Next Analysis Question
 
 The next analytical step is to combine cohort retention with customer value tiers from the Python layer. That would show whether high-value customers are also retained better over time.

@@ -14,6 +14,7 @@ const cohortRetention = numericRows(readCsv(path.join("data", "marts", "mart_coh
 const revenueForecast = numericRows(readCsv(path.join("data", "marts", "mart_revenue_forecast.csv")));
 const forecastBacktest = numericRows(readCsv(path.join("data", "marts", "mart_forecast_backtest.csv")));
 const forecastAccuracy = numericRows(readCsv(path.join("data", "marts", "mart_forecast_accuracy.csv")));
+const anomalyAlerts = numericRows(readCsv(path.join("data", "marts", "mart_anomaly_alerts.csv")));
 const validation = readCsv(path.join("data", "quality", "validation_results.csv"));
 
 const kpis = {
@@ -37,6 +38,7 @@ const summary = {
   revenueForecast,
   forecastBacktest,
   forecastAccuracy,
+  anomalyAlerts,
   validation
 };
 
@@ -55,7 +57,7 @@ function numericRows(rows) {
   );
 }
 
-function writeExecutiveSummary({ kpis, monthly, byCategory, byChannel, byRegion, cohortRetention, revenueForecast, forecastAccuracy }) {
+function writeExecutiveSummary({ kpis, monthly, byCategory, byChannel, byRegion, cohortRetention, revenueForecast, forecastAccuracy, anomalyAlerts }) {
   const latest = monthly.at(-1);
   const previous = monthly.at(-2);
   const growth = ((latest.revenue - previous.revenue) / previous.revenue) * 100;
@@ -66,6 +68,7 @@ function writeExecutiveSummary({ kpis, monthly, byCategory, byChannel, byRegion,
   const avgMonthOneRetention = monthOneRetention.reduce((total, row) => total + row.retention_rate, 0) / monthOneRetention.length;
   const firstForecast = revenueForecast[0];
   const accuracy = forecastAccuracy[0];
+  const alertCount = anomalyAlerts.filter((row) => row.alert_flag === "alert").length;
 
   const markdown = `# Executive Summary
 
@@ -80,6 +83,7 @@ Revenue reached ${money(kpis.revenue)} across ${kpis.orders.toLocaleString()} or
 - Month-one cohort retention averages ${(avgMonthOneRetention * 100).toFixed(1)}%, adding a customer behavior lens beyond basic sales reporting.
 - A simple six-month trend forecast estimates ${money(firstForecast.forecast_revenue)} in revenue for ${firstForecast.month}.
 - The rolling forecast backtest has ${(accuracy.mean_absolute_percentage_error * 100).toFixed(1)}% MAPE across ${accuracy.backtest_months} months.
+- Rolling anomaly monitoring flagged ${alertCount} metric-month combinations across revenue, margin, discounting, and fulfillment.
 
 ## Recommended Actions
 
@@ -88,6 +92,7 @@ Revenue reached ${money(kpis.revenue)} across ${kpis.orders.toLocaleString()} or
 3. Track fulfillment days as an operational KPI because slower delivery can weaken repeat purchase behavior.
 4. Keep the trend forecast as a planning signal, but validate it against future actuals before using it for decisions.
 5. Track forecast accuracy monthly so planning assumptions improve over time.
+6. Review anomaly alerts after every build to catch unusual metric movement before it reaches reporting.
 `;
 
   fs.writeFileSync(path.join(processedDir, "executive-summary.md"), markdown);

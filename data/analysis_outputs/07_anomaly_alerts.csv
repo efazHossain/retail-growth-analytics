@@ -1,0 +1,12 @@
+month,metric_name,metric_field,current_value,baseline_average,baseline_stddev,z_score,threshold,alert_flag,severity,note
+2024-07,Gross margin rate,margin_rate,0.3219,0.3261,0.0021,-2.0023,1.8,alert,medium,Gross margin rate is below its rolling six-month baseline with z-score -2.
+2024-07,Monthly revenue,revenue,241108.93,212375.0567,17187.2688,1.6718,1.6,alert,medium,Monthly revenue is above its rolling six-month baseline with z-score 1.67.
+2024-08,Monthly revenue,revenue,252355.8,221905.1717,14398.4305,2.1149,1.6,alert,medium,Monthly revenue is above its rolling six-month baseline with z-score 2.11.
+2024-09,Monthly revenue,revenue,256716.8,230417.925,14781.1837,1.7792,1.6,alert,medium,Monthly revenue is above its rolling six-month baseline with z-score 1.78.
+2024-10,Average discount rate,avg_discount_rate,0.1162,0.1129,0.0018,1.8465,1.6,alert,medium,Average discount rate is above its rolling six-month baseline with z-score 1.85.
+2024-10,Gross margin rate,margin_rate,0.3207,0.3252,0.0023,-1.9112,1.8,alert,medium,Gross margin rate is below its rolling six-month baseline with z-score -1.91.
+2024-10,Monthly revenue,revenue,274973.76,238073.3833,14522.4302,2.5409,1.6,alert,high,Monthly revenue is above its rolling six-month baseline with z-score 2.54.
+2024-11,Monthly revenue,revenue,372115.67,248188.4117,15530.6504,7.9795,1.6,alert,high,Monthly revenue is above its rolling six-month baseline with z-score 7.98.
+2024-12,Average fulfillment days,avg_fulfillment_days,3.6,3.48,0.0473,2.5392,1.6,alert,high,Average fulfillment days is above its rolling six-month baseline with z-score 2.54.
+2024-12,Monthly revenue,revenue,379058.84,272490.3017,46156.9204,2.3088,1.6,alert,medium,Monthly revenue is above its rolling six-month baseline with z-score 2.31.
+2025-02,Average discount rate,avg_discount_rate,0.1178,0.1129,0.0023,2.0983,1.6,alert,medium,Average discount rate is above its rolling six-month baseline with z-score 2.1.

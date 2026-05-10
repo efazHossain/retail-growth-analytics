@@ -18,7 +18,7 @@ This view compares channel revenue mix and regional margin performance.
 
 ![Advanced analytics](assets/03-advanced-analytics.png)
 
-This view shows cohort retention, pipeline health checks, revenue forecast, and forecast accuracy.
+This view shows cohort retention, pipeline health checks, revenue forecast, forecast accuracy, and anomaly alerts.
 
 ## Capture Checklist
 

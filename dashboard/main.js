@@ -18,6 +18,7 @@ function renderDashboard(data) {
   renderQuality(data.validation);
   renderForecast(data.revenueForecast);
   renderForecastAccuracy(data.forecastAccuracy);
+  renderAnomalies(data.anomalyAlerts);
 }
 
 function renderKpis(kpis) {
@@ -144,6 +145,19 @@ function renderForecastAccuracy(rows) {
       <li><span>Backtest months</span><strong>${row.backtest_months}</strong></li>
       <li><span>Mean absolute error</span><strong>${currency.format(row.mean_absolute_error)}</strong></li>
       <li><span>Average bias</span><strong>${currency.format(row.average_forecast_bias)}</strong></li>
+    </ul>
+  `;
+}
+
+function renderAnomalies(rows) {
+  const alerts = rows.filter((row) => row.alert_flag === "alert");
+  const recent = alerts.slice(-4).reverse();
+  document.querySelector("#anomalies").innerHTML = `
+    <div class="quality-score"><strong>${alerts.length}</strong><span>alerts</span></div>
+    <ul>
+      ${recent.length > 0 ? recent.map((row) => `
+        <li><span>${row.month} ${row.metric_name}</span><strong>${row.severity}</strong></li>
+      `).join("") : "<li><span>No current alerts</span><strong>OK</strong></li>"}
     </ul>
   `;
 }
