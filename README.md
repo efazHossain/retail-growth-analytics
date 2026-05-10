@@ -43,6 +43,21 @@ You can also run the full pipeline with:
 node scripts/build.js
 ```
 
+## Optional Python Layer
+
+If you use Python through WSL, run:
+
+```bash
+cd /mnt/c/Users/efazh/Projects/analytics-project
+bash scripts/run-python.sh
+```
+
+From PowerShell, you can call the WSL helper:
+
+```powershell
+.\scripts\run-python-wsl.ps1
+```
+
 ## What This Project Covers
 
 1. A reproducible analytics workflow using raw order and customer data.
