@@ -1,5 +1,6 @@
 -- Business questions this project is designed to answer.
--- The CSV files can be loaded into SQLite, DuckDB, BigQuery, Snowflake, or PostgreSQL.
+-- The raw, staging, and mart CSV files can be loaded into SQLite, DuckDB,
+-- BigQuery, Snowflake, or PostgreSQL.
 
 -- 1. Monthly revenue, profit, and margin trend
 SELECT

@@ -155,6 +155,49 @@ th {
   height: 100%;
 }
 
+.bar-fill.forecast {
+  background: var(--gold);
+}
+
+.quality {
+  margin-bottom: 22px;
+}
+
+.quality-score {
+  align-items: baseline;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.quality-score strong {
+  color: var(--green);
+  font-size: 28px;
+}
+
+.quality-score span {
+  color: var(--muted);
+}
+
+.quality ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quality li {
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.quality li strong {
+  color: var(--green);
+  text-transform: uppercase;
+}
+
 @media (max-width: 860px) {
   .topbar,
   .grid,

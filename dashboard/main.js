@@ -14,6 +14,9 @@ function renderDashboard(data) {
   renderTable(data.byCategory);
   renderBars("channels", data.byChannel, "channel", "revenue", currency);
   renderBars("regions", data.byRegion, "region", "margin_rate", percent);
+  renderCohorts(data.cohortRetention);
+  renderQuality(data.validation);
+  renderForecast(data.revenueForecast);
 }
 
 function renderKpis(kpis) {
@@ -85,6 +88,49 @@ function renderBars(id, rows, labelField, valueField, formatter) {
     <div class="bar-row">
       <div class="bar-label"><span>${row[labelField]}</span><strong>${formatter.format(row[valueField])}</strong></div>
       <div class="bar-track"><div class="bar-fill" style="width:${(row[valueField] / max) * 100}%"></div></div>
+    </div>
+  `).join("");
+}
+
+function renderCohorts(rows) {
+  const recentCohorts = [...new Set(rows.map((row) => row.cohort_month))].slice(-6);
+  const monthNumbers = [0, 1, 2, 3, 4, 5];
+  document.querySelector("#cohorts").innerHTML = `
+    <table>
+      <thead>
+        <tr><th>Cohort</th>${monthNumbers.map((month) => `<th>M${month}</th>`).join("")}</tr>
+      </thead>
+      <tbody>
+        ${recentCohorts.map((cohort) => `
+          <tr>
+            <td>${cohort}</td>
+            ${monthNumbers.map((month) => {
+              const row = rows.find((item) => item.cohort_month === cohort && item.month_number === month);
+              return `<td>${row ? percent.format(row.retention_rate) : ""}</td>`;
+            }).join("")}
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderQuality(rows) {
+  const passed = rows.filter((row) => row.status === "pass").length;
+  document.querySelector("#quality").innerHTML = `
+    <div class="quality-score"><strong>${passed}/${rows.length}</strong><span>checks passed</span></div>
+    <ul>
+      ${rows.slice(0, 5).map((row) => `<li><span>${row.check_name}</span><strong>${row.status}</strong></li>`).join("")}
+    </ul>
+  `;
+}
+
+function renderForecast(rows) {
+  const max = Math.max(...rows.map((row) => row.forecast_revenue));
+  document.querySelector("#forecast").innerHTML = rows.map((row) => `
+    <div class="bar-row">
+      <div class="bar-label"><span>${row.month}</span><strong>${currency.format(row.forecast_revenue)}</strong></div>
+      <div class="bar-track"><div class="bar-fill forecast" style="width:${(row.forecast_revenue / max) * 100}%"></div></div>
     </div>
   `).join("");
 }

@@ -1,252 +1,1058 @@
 {
   "kpis": {
     "orders": 13526,
+    "customers": 678,
     "revenue": 4992744.96,
     "profit": 1618850.89,
     "average_order_value": 369.12,
-    "gross_margin_rate": 0.324,
-    "average_fulfillment_days": 3.5
+    "gross_margin_rate": 0.3242,
+    "average_fulfillment_days": 3.46,
+    "validation_pass_rate": 1
   },
   "monthly": [
     {
       "month": "2024-01",
       "orders": 520,
+      "customers": 418,
+      "units": 1273,
       "revenue": 183928.24,
+      "cost": 123659.87,
       "profit": 60268.37,
-      "units": 1273
+      "discount_rate": 59.437000000000026,
+      "fulfillment_days": 1801,
+      "average_order_value": 353.71,
+      "margin_rate": 0.3277,
+      "avg_discount_rate": 0.1143,
+      "avg_fulfillment_days": 3.46
     },
     {
       "month": "2024-02",
       "orders": 544,
+      "customers": 444,
+      "units": 1385,
       "revenue": 201279.28,
+      "cost": 135427.32,
       "profit": 65851.96,
-      "units": 1385
+      "discount_rate": 61.60499999999994,
+      "fulfillment_days": 1815,
+      "average_order_value": 370,
+      "margin_rate": 0.3272,
+      "avg_discount_rate": 0.1132,
+      "avg_fulfillment_days": 3.34
     },
     {
       "month": "2024-03",
       "orders": 568,
+      "customers": 444,
+      "units": 1424,
       "revenue": 210784.05,
+      "cost": 142540.6,
       "profit": 68243.45,
-      "units": 1424
+      "discount_rate": 62.508999999999965,
+      "fulfillment_days": 1976,
+      "average_order_value": 371.1,
+      "margin_rate": 0.3238,
+      "avg_discount_rate": 0.1101,
+      "avg_fulfillment_days": 3.48
     },
     {
       "month": "2024-04",
       "orders": 592,
+      "customers": 457,
+      "units": 1456,
       "revenue": 214283.59,
+      "cost": 144864.18,
       "profit": 69419.41,
-      "units": 1456
+      "discount_rate": 66.87900000000009,
+      "fulfillment_days": 1914,
+      "average_order_value": 361.97,
+      "margin_rate": 0.324,
+      "avg_discount_rate": 0.113,
+      "avg_fulfillment_days": 3.23
     },
     {
       "month": "2024-05",
       "orders": 616,
+      "customers": 479,
+      "units": 1540,
       "revenue": 226304.33,
+      "cost": 152849.32,
       "profit": 73455.01,
-      "units": 1540
+      "discount_rate": 68.23999999999995,
+      "fulfillment_days": 2151,
+      "average_order_value": 367.38,
+      "margin_rate": 0.3246,
+      "avg_discount_rate": 0.1108,
+      "avg_fulfillment_days": 3.49
     },
     {
       "month": "2024-06",
       "orders": 640,
+      "customers": 480,
+      "units": 1596,
       "revenue": 237670.85,
+      "cost": 159382.69,
       "profit": 78288.16,
-      "units": 1596
+      "discount_rate": 73.04100000000001,
+      "fulfillment_days": 2217,
+      "average_order_value": 371.36,
+      "margin_rate": 0.3294,
+      "avg_discount_rate": 0.1141,
+      "avg_fulfillment_days": 3.46
     },
     {
       "month": "2024-07",
       "orders": 664,
+      "customers": 531,
+      "units": 1628,
       "revenue": 241108.93,
+      "cost": 163505.83,
       "profit": 77603.1,
-      "units": 1628
+      "discount_rate": 76.24400000000004,
+      "fulfillment_days": 2318,
+      "average_order_value": 363.12,
+      "margin_rate": 0.3219,
+      "avg_discount_rate": 0.1148,
+      "avg_fulfillment_days": 3.49
     },
     {
       "month": "2024-08",
       "orders": 688,
+      "customers": 533,
+      "units": 1723,
       "revenue": 252355.8,
+      "cost": 170460,
       "profit": 81895.8,
-      "units": 1723
+      "discount_rate": 75.74699999999997,
+      "fulfillment_days": 2392,
+      "average_order_value": 366.8,
+      "margin_rate": 0.3245,
+      "avg_discount_rate": 0.1101,
+      "avg_fulfillment_days": 3.48
     },
     {
       "month": "2024-09",
       "orders": 712,
+      "customers": 533,
+      "units": 1776,
       "revenue": 256716.8,
+      "cost": 172871.5,
       "profit": 83845.3,
-      "units": 1776
+      "discount_rate": 81.472,
+      "fulfillment_days": 2534,
+      "average_order_value": 360.56,
+      "margin_rate": 0.3266,
+      "avg_discount_rate": 0.1144,
+      "avg_fulfillment_days": 3.56
     },
     {
       "month": "2024-10",
       "orders": 736,
+      "customers": 553,
+      "units": 1829,
       "revenue": 274973.76,
+      "cost": 186801.89,
       "profit": 88171.87,
-      "units": 1829
+      "discount_rate": 85.49700000000006,
+      "fulfillment_days": 2500,
+      "average_order_value": 373.61,
+      "margin_rate": 0.3207,
+      "avg_discount_rate": 0.1162,
+      "avg_fulfillment_days": 3.4
     },
     {
       "month": "2024-11",
       "orders": 1003,
+      "customers": 672,
+      "units": 2501,
       "revenue": 372115.67,
+      "cost": 250203.6,
       "profit": 121912.07,
-      "units": 2501
+      "discount_rate": 111.02700000000013,
+      "fulfillment_days": 3504,
+      "average_order_value": 371,
+      "margin_rate": 0.3276,
+      "avg_discount_rate": 0.1107,
+      "avg_fulfillment_days": 3.49
     },
     {
       "month": "2024-12",
       "orders": 1035,
+      "customers": 678,
+      "units": 2594,
       "revenue": 379058.84,
+      "cost": 255752.37,
       "profit": 123306.47,
-      "units": 2594
+      "discount_rate": 118.96800000000019,
+      "fulfillment_days": 3721,
+      "average_order_value": 366.24,
+      "margin_rate": 0.3253,
+      "avg_discount_rate": 0.1149,
+      "avg_fulfillment_days": 3.6
     },
     {
       "month": "2025-01",
       "orders": 808,
+      "customers": 589,
+      "units": 2021,
       "revenue": 303013.61,
+      "cost": 205896.55,
       "profit": 97117.06,
-      "units": 2021
+      "discount_rate": 90.00499999999995,
+      "fulfillment_days": 2779,
+      "average_order_value": 375.02,
+      "margin_rate": 0.3205,
+      "avg_discount_rate": 0.1114,
+      "avg_fulfillment_days": 3.44
     },
     {
       "month": "2025-02",
       "orders": 832,
+      "customers": 588,
+      "units": 2114,
       "revenue": 305906.66,
+      "cost": 205963.61,
       "profit": 99943.05,
-      "units": 2114
+      "discount_rate": 98.041,
+      "fulfillment_days": 2930,
+      "average_order_value": 367.68,
+      "margin_rate": 0.3267,
+      "avg_discount_rate": 0.1178,
+      "avg_fulfillment_days": 3.52
     },
     {
       "month": "2025-03",
       "orders": 856,
+      "customers": 607,
+      "units": 2132,
       "revenue": 320902.28,
+      "cost": 217923.14,
       "profit": 102979.14,
-      "units": 2132
+      "discount_rate": 98.29799999999989,
+      "fulfillment_days": 3017,
+      "average_order_value": 374.89,
+      "margin_rate": 0.3209,
+      "avg_discount_rate": 0.1148,
+      "avg_fulfillment_days": 3.52
     },
     {
       "month": "2025-04",
       "orders": 880,
+      "customers": 619,
+      "units": 2245,
       "revenue": 334642.02,
+      "cost": 227073.18,
       "profit": 107568.84,
-      "units": 2245
+      "discount_rate": 98.67700000000028,
+      "fulfillment_days": 3039,
+      "average_order_value": 380.28,
+      "margin_rate": 0.3214,
+      "avg_discount_rate": 0.1121,
+      "avg_fulfillment_days": 3.45
     },
     {
       "month": "2025-05",
       "orders": 904,
+      "customers": 636,
+      "units": 2289,
       "revenue": 327104.22,
+      "cost": 221475.46,
       "profit": 105628.76,
-      "units": 2289
+      "discount_rate": 103.2560000000001,
+      "fulfillment_days": 3129,
+      "average_order_value": 361.84,
+      "margin_rate": 0.3229,
+      "avg_discount_rate": 0.1142,
+      "avg_fulfillment_days": 3.46
     },
     {
       "month": "2025-06",
       "orders": 928,
+      "customers": 647,
+      "units": 2345,
       "revenue": 350596.03,
+      "cost": 237242.96,
       "profit": 113353.07,
-      "units": 2345
+      "discount_rate": 102.77600000000007,
+      "fulfillment_days": 3196,
+      "average_order_value": 377.8,
+      "margin_rate": 0.3233,
+      "avg_discount_rate": 0.1108,
+      "avg_fulfillment_days": 3.44
     }
   ],
   "byCategory": [
     {
       "category": "Electronics",
       "orders": 2764,
-      "revenue": 1654185.28,
-      "profit": 437348.28,
+      "customers": 1068,
       "units": 6912,
-      "avg_discount": 0.114,
-      "margin_rate": 0.264
+      "revenue": 1654185.28,
+      "cost": 1216837,
+      "profit": 437348.28,
+      "discount_rate": 315.5889999999982,
+      "fulfillment_days": 9548,
+      "average_order_value": 598.48,
+      "margin_rate": 0.2644,
+      "avg_discount_rate": 0.1142,
+      "avg_fulfillment_days": 3.45
     },
     {
       "category": "Home Office",
       "orders": 2754,
-      "revenue": 1111985.2,
-      "profit": 438670.59,
+      "customers": 1079,
       "units": 6876,
-      "avg_discount": 0.113,
-      "margin_rate": 0.394
+      "revenue": 1111985.2,
+      "cost": 673314.61,
+      "profit": 438670.59,
+      "discount_rate": 310.3939999999994,
+      "fulfillment_days": 9639,
+      "average_order_value": 403.77,
+      "margin_rate": 0.3945,
+      "avg_discount_rate": 0.1127,
+      "avg_fulfillment_days": 3.5
     },
     {
       "category": "Fitness",
       "orders": 2678,
-      "revenue": 900720.37,
-      "profit": 301674.58,
+      "customers": 1069,
       "units": 6734,
-      "avg_discount": 0.112,
-      "margin_rate": 0.335
+      "revenue": 900720.37,
+      "cost": 599045.79,
+      "profit": 301674.58,
+      "discount_rate": 299.8669999999996,
+      "fulfillment_days": 9217,
+      "average_order_value": 336.34,
+      "margin_rate": 0.3349,
+      "avg_discount_rate": 0.112,
+      "avg_fulfillment_days": 3.44
     },
     {
       "category": "Travel",
       "orders": 2628,
-      "revenue": 733928.25,
-      "profit": 231455.49,
+      "customers": 1056,
       "units": 6617,
-      "avg_discount": 0.113,
-      "margin_rate": 0.315
+      "revenue": 733928.25,
+      "cost": 502472.76,
+      "profit": 231455.49,
+      "discount_rate": 295.9399999999993,
+      "fulfillment_days": 9155,
+      "average_order_value": 279.27,
+      "margin_rate": 0.3154,
+      "avg_discount_rate": 0.1126,
+      "avg_fulfillment_days": 3.48
     },
     {
       "category": "Kitchen",
       "orders": 2702,
-      "revenue": 591925.86,
-      "profit": 209701.95,
+      "customers": 1074,
       "units": 6732,
-      "avg_discount": 0.115,
-      "margin_rate": 0.354
+      "revenue": 591925.86,
+      "cost": 382223.91,
+      "profit": 209701.95,
+      "discount_rate": 309.928999999999,
+      "fulfillment_days": 9374,
+      "average_order_value": 219.07,
+      "margin_rate": 0.3543,
+      "avg_discount_rate": 0.1147,
+      "avg_fulfillment_days": 3.47
     }
   ],
   "byChannel": [
     {
       "channel": "Online",
       "orders": 4567,
-      "revenue": 1764767.84,
-      "profit": 570363.01,
+      "customers": 1180,
       "units": 11440,
-      "avg_discount": 0.08,
-      "margin_rate": 0.323
+      "revenue": 1764767.84,
+      "cost": 1194404.83,
+      "profit": 570363.01,
+      "discount_rate": 363.67299999999875,
+      "fulfillment_days": 20405,
+      "average_order_value": 386.42,
+      "margin_rate": 0.3232,
+      "avg_discount_rate": 0.0796,
+      "avg_fulfillment_days": 4.47
     },
     {
       "channel": "Retail Store",
       "orders": 4479,
-      "revenue": 1700448.37,
-      "profit": 554233.46,
+      "customers": 1172,
       "units": 11186,
-      "avg_discount": 0.08,
-      "margin_rate": 0.326
+      "revenue": 1700448.37,
+      "cost": 1146214.91,
+      "profit": 554233.46,
+      "discount_rate": 359.6869999999987,
+      "fulfillment_days": 13317,
+      "average_order_value": 379.65,
+      "margin_rate": 0.3259,
+      "avg_discount_rate": 0.0803,
+      "avg_fulfillment_days": 2.97
     },
     {
       "channel": "Marketplace",
       "orders": 4480,
-      "revenue": 1527528.75,
-      "profit": 494254.42,
+      "customers": 1167,
       "units": 11245,
-      "avg_discount": 0.18,
-      "margin_rate": 0.324
+      "revenue": 1527528.75,
+      "cost": 1033274.33,
+      "profit": 494254.42,
+      "discount_rate": 808.3589999999978,
+      "fulfillment_days": 13211,
+      "average_order_value": 340.97,
+      "margin_rate": 0.3236,
+      "avg_discount_rate": 0.1804,
+      "avg_fulfillment_days": 2.95
     }
   ],
   "byRegion": [
     {
       "region": "Midwest",
       "orders": 3548,
-      "revenue": 1310206.31,
-      "profit": 422009.3,
+      "customers": 318,
       "units": 8804,
-      "avg_discount": 0.114,
-      "margin_rate": 0.322
+      "revenue": 1310206.31,
+      "cost": 888197.01,
+      "profit": 422009.3,
+      "discount_rate": 403.5109999999985,
+      "fulfillment_days": 12069,
+      "average_order_value": 369.28,
+      "margin_rate": 0.3221,
+      "avg_discount_rate": 0.1137,
+      "avg_fulfillment_days": 3.4
     },
     {
       "region": "West",
       "orders": 3458,
-      "revenue": 1282856.95,
-      "profit": 414149.83,
+      "customers": 301,
       "units": 8726,
-      "avg_discount": 0.112,
-      "margin_rate": 0.323
-    },
-    {
-      "region": "South",
-      "orders": 3516,
-      "revenue": 1281475.62,
-      "profit": 418915.33,
-      "units": 8731,
-      "avg_discount": 0.115,
-      "margin_rate": 0.327
+      "revenue": 1282856.95,
+      "cost": 868707.12,
+      "profit": 414149.83,
+      "discount_rate": 388.76200000000017,
+      "fulfillment_days": 12156,
+      "average_order_value": 370.98,
+      "margin_rate": 0.3228,
+      "avg_discount_rate": 0.1124,
+      "avg_fulfillment_days": 3.52
     },
     {
       "region": "Northeast",
       "orders": 3004,
-      "revenue": 1118206.08,
-      "profit": 363776.43,
+      "customers": 271,
       "units": 7610,
-      "avg_discount": 0.112,
-      "margin_rate": 0.325
+      "revenue": 1118206.08,
+      "cost": 754429.65,
+      "profit": 363776.43,
+      "discount_rate": 336.7559999999996,
+      "fulfillment_days": 10450,
+      "average_order_value": 372.24,
+      "margin_rate": 0.3253,
+      "avg_discount_rate": 0.1121,
+      "avg_fulfillment_days": 3.48
+    },
+    {
+      "region": "South",
+      "orders": 3516,
+      "customers": 310,
+      "units": 8731,
+      "revenue": 1281475.62,
+      "cost": 862560.29,
+      "profit": 418915.33,
+      "discount_rate": 402.6899999999982,
+      "fulfillment_days": 12258,
+      "average_order_value": 364.47,
+      "margin_rate": 0.3269,
+      "avg_discount_rate": 0.1145,
+      "avg_fulfillment_days": 3.49
+    }
+  ],
+  "cohortRetention": [
+    {
+      "cohort_month": "2024-01",
+      "month_number": 0,
+      "cohort_size": 97,
+      "active_customers": 28,
+      "retention_rate": 0.2887
+    },
+    {
+      "cohort_month": "2024-01",
+      "month_number": 1,
+      "cohort_size": 97,
+      "active_customers": 36,
+      "retention_rate": 0.3711
+    },
+    {
+      "cohort_month": "2024-01",
+      "month_number": 2,
+      "cohort_size": 97,
+      "active_customers": 42,
+      "retention_rate": 0.433
+    },
+    {
+      "cohort_month": "2024-01",
+      "month_number": 3,
+      "cohort_size": 97,
+      "active_customers": 36,
+      "retention_rate": 0.3711
+    },
+    {
+      "cohort_month": "2024-01",
+      "month_number": 4,
+      "cohort_size": 97,
+      "active_customers": 36,
+      "retention_rate": 0.3711
+    },
+    {
+      "cohort_month": "2024-01",
+      "month_number": 5,
+      "cohort_size": 97,
+      "active_customers": 36,
+      "retention_rate": 0.3711
+    },
+    {
+      "cohort_month": "2024-02",
+      "month_number": 0,
+      "cohort_size": 91,
+      "active_customers": 32,
+      "retention_rate": 0.3516
+    },
+    {
+      "cohort_month": "2024-02",
+      "month_number": 1,
+      "cohort_size": 91,
+      "active_customers": 47,
+      "retention_rate": 0.5165
+    },
+    {
+      "cohort_month": "2024-02",
+      "month_number": 2,
+      "cohort_size": 91,
+      "active_customers": 29,
+      "retention_rate": 0.3187
+    },
+    {
+      "cohort_month": "2024-02",
+      "month_number": 3,
+      "cohort_size": 91,
+      "active_customers": 37,
+      "retention_rate": 0.4066
+    },
+    {
+      "cohort_month": "2024-02",
+      "month_number": 4,
+      "cohort_size": 91,
+      "active_customers": 37,
+      "retention_rate": 0.4066
+    },
+    {
+      "cohort_month": "2024-02",
+      "month_number": 5,
+      "cohort_size": 91,
+      "active_customers": 47,
+      "retention_rate": 0.5165
+    },
+    {
+      "cohort_month": "2024-03",
+      "month_number": 0,
+      "cohort_size": 91,
+      "active_customers": 28,
+      "retention_rate": 0.3077
+    },
+    {
+      "cohort_month": "2024-03",
+      "month_number": 1,
+      "cohort_size": 91,
+      "active_customers": 42,
+      "retention_rate": 0.4615
+    },
+    {
+      "cohort_month": "2024-03",
+      "month_number": 2,
+      "cohort_size": 91,
+      "active_customers": 37,
+      "retention_rate": 0.4066
+    },
+    {
+      "cohort_month": "2024-03",
+      "month_number": 3,
+      "cohort_size": 91,
+      "active_customers": 45,
+      "retention_rate": 0.4945
+    },
+    {
+      "cohort_month": "2024-03",
+      "month_number": 4,
+      "cohort_size": 91,
+      "active_customers": 39,
+      "retention_rate": 0.4286
+    },
+    {
+      "cohort_month": "2024-03",
+      "month_number": 5,
+      "cohort_size": 91,
+      "active_customers": 45,
+      "retention_rate": 0.4945
+    },
+    {
+      "cohort_month": "2024-04",
+      "month_number": 0,
+      "cohort_size": 108,
+      "active_customers": 42,
+      "retention_rate": 0.3889
+    },
+    {
+      "cohort_month": "2024-04",
+      "month_number": 1,
+      "cohort_size": 108,
+      "active_customers": 45,
+      "retention_rate": 0.4167
+    },
+    {
+      "cohort_month": "2024-04",
+      "month_number": 2,
+      "cohort_size": 108,
+      "active_customers": 45,
+      "retention_rate": 0.4167
+    },
+    {
+      "cohort_month": "2024-04",
+      "month_number": 3,
+      "cohort_size": 108,
+      "active_customers": 48,
+      "retention_rate": 0.4444
+    },
+    {
+      "cohort_month": "2024-04",
+      "month_number": 4,
+      "cohort_size": 108,
+      "active_customers": 52,
+      "retention_rate": 0.4815
+    },
+    {
+      "cohort_month": "2024-04",
+      "month_number": 5,
+      "cohort_size": 108,
+      "active_customers": 46,
+      "retention_rate": 0.4259
+    },
+    {
+      "cohort_month": "2024-05",
+      "month_number": 0,
+      "cohort_size": 122,
+      "active_customers": 47,
+      "retention_rate": 0.3852
+    },
+    {
+      "cohort_month": "2024-05",
+      "month_number": 1,
+      "cohort_size": 122,
+      "active_customers": 58,
+      "retention_rate": 0.4754
+    },
+    {
+      "cohort_month": "2024-05",
+      "month_number": 2,
+      "cohort_size": 122,
+      "active_customers": 64,
+      "retention_rate": 0.5246
+    },
+    {
+      "cohort_month": "2024-05",
+      "month_number": 3,
+      "cohort_size": 122,
+      "active_customers": 60,
+      "retention_rate": 0.4918
+    },
+    {
+      "cohort_month": "2024-05",
+      "month_number": 4,
+      "cohort_size": 122,
+      "active_customers": 54,
+      "retention_rate": 0.4426
+    },
+    {
+      "cohort_month": "2024-05",
+      "month_number": 5,
+      "cohort_size": 122,
+      "active_customers": 50,
+      "retention_rate": 0.4098
+    },
+    {
+      "cohort_month": "2024-06",
+      "month_number": 0,
+      "cohort_size": 98,
+      "active_customers": 38,
+      "retention_rate": 0.3878
+    },
+    {
+      "cohort_month": "2024-06",
+      "month_number": 1,
+      "cohort_size": 98,
+      "active_customers": 41,
+      "retention_rate": 0.4184
+    },
+    {
+      "cohort_month": "2024-06",
+      "month_number": 2,
+      "cohort_size": 98,
+      "active_customers": 40,
+      "retention_rate": 0.4082
+    },
+    {
+      "cohort_month": "2024-06",
+      "month_number": 3,
+      "cohort_size": 98,
+      "active_customers": 42,
+      "retention_rate": 0.4286
+    },
+    {
+      "cohort_month": "2024-06",
+      "month_number": 4,
+      "cohort_size": 98,
+      "active_customers": 51,
+      "retention_rate": 0.5204
+    },
+    {
+      "cohort_month": "2024-06",
+      "month_number": 5,
+      "cohort_size": 98,
+      "active_customers": 47,
+      "retention_rate": 0.4796
+    },
+    {
+      "cohort_month": "2024-07",
+      "month_number": 0,
+      "cohort_size": 102,
+      "active_customers": 41,
+      "retention_rate": 0.402
+    },
+    {
+      "cohort_month": "2024-07",
+      "month_number": 1,
+      "cohort_size": 102,
+      "active_customers": 38,
+      "retention_rate": 0.3725
+    },
+    {
+      "cohort_month": "2024-07",
+      "month_number": 2,
+      "cohort_size": 102,
+      "active_customers": 37,
+      "retention_rate": 0.3627
+    },
+    {
+      "cohort_month": "2024-07",
+      "month_number": 3,
+      "cohort_size": 102,
+      "active_customers": 45,
+      "retention_rate": 0.4412
+    },
+    {
+      "cohort_month": "2024-07",
+      "month_number": 4,
+      "cohort_size": 102,
+      "active_customers": 59,
+      "retention_rate": 0.5784
+    },
+    {
+      "cohort_month": "2024-07",
+      "month_number": 5,
+      "cohort_size": 102,
+      "active_customers": 68,
+      "retention_rate": 0.6667
+    },
+    {
+      "cohort_month": "2024-08",
+      "month_number": 0,
+      "cohort_size": 92,
+      "active_customers": 44,
+      "retention_rate": 0.4783
+    },
+    {
+      "cohort_month": "2024-08",
+      "month_number": 1,
+      "cohort_size": 92,
+      "active_customers": 38,
+      "retention_rate": 0.413
+    },
+    {
+      "cohort_month": "2024-08",
+      "month_number": 2,
+      "cohort_size": 92,
+      "active_customers": 33,
+      "retention_rate": 0.3587
+    },
+    {
+      "cohort_month": "2024-08",
+      "month_number": 3,
+      "cohort_size": 92,
+      "active_customers": 45,
+      "retention_rate": 0.4891
+    },
+    {
+      "cohort_month": "2024-08",
+      "month_number": 4,
+      "cohort_size": 92,
+      "active_customers": 53,
+      "retention_rate": 0.5761
+    },
+    {
+      "cohort_month": "2024-08",
+      "month_number": 5,
+      "cohort_size": 92,
+      "active_customers": 43,
+      "retention_rate": 0.4674
+    },
+    {
+      "cohort_month": "2024-09",
+      "month_number": 0,
+      "cohort_size": 106,
+      "active_customers": 51,
+      "retention_rate": 0.4811
+    },
+    {
+      "cohort_month": "2024-09",
+      "month_number": 1,
+      "cohort_size": 106,
+      "active_customers": 45,
+      "retention_rate": 0.4245
+    },
+    {
+      "cohort_month": "2024-09",
+      "month_number": 2,
+      "cohort_size": 106,
+      "active_customers": 67,
+      "retention_rate": 0.6321
+    },
+    {
+      "cohort_month": "2024-09",
+      "month_number": 3,
+      "cohort_size": 106,
+      "active_customers": 60,
+      "retention_rate": 0.566
+    },
+    {
+      "cohort_month": "2024-09",
+      "month_number": 4,
+      "cohort_size": 106,
+      "active_customers": 56,
+      "retention_rate": 0.5283
+    },
+    {
+      "cohort_month": "2024-09",
+      "month_number": 5,
+      "cohort_size": 106,
+      "active_customers": 56,
+      "retention_rate": 0.5283
+    },
+    {
+      "cohort_month": "2024-10",
+      "month_number": 0,
+      "cohort_size": 97,
+      "active_customers": 33,
+      "retention_rate": 0.3402
+    },
+    {
+      "cohort_month": "2024-10",
+      "month_number": 1,
+      "cohort_size": 97,
+      "active_customers": 55,
+      "retention_rate": 0.567
+    },
+    {
+      "cohort_month": "2024-10",
+      "month_number": 2,
+      "cohort_size": 97,
+      "active_customers": 54,
+      "retention_rate": 0.5567
+    },
+    {
+      "cohort_month": "2024-10",
+      "month_number": 3,
+      "cohort_size": 97,
+      "active_customers": 54,
+      "retention_rate": 0.5567
+    },
+    {
+      "cohort_month": "2024-10",
+      "month_number": 4,
+      "cohort_size": 97,
+      "active_customers": 51,
+      "retention_rate": 0.5258
+    },
+    {
+      "cohort_month": "2024-10",
+      "month_number": 5,
+      "cohort_size": 97,
+      "active_customers": 44,
+      "retention_rate": 0.4536
+    },
+    {
+      "cohort_month": "2024-11",
+      "month_number": 0,
+      "cohort_size": 102,
+      "active_customers": 54,
+      "retention_rate": 0.5294
+    },
+    {
+      "cohort_month": "2024-11",
+      "month_number": 1,
+      "cohort_size": 102,
+      "active_customers": 60,
+      "retention_rate": 0.5882
+    },
+    {
+      "cohort_month": "2024-11",
+      "month_number": 2,
+      "cohort_size": 102,
+      "active_customers": 52,
+      "retention_rate": 0.5098
+    },
+    {
+      "cohort_month": "2024-11",
+      "month_number": 3,
+      "cohort_size": 102,
+      "active_customers": 49,
+      "retention_rate": 0.4804
+    },
+    {
+      "cohort_month": "2024-11",
+      "month_number": 4,
+      "cohort_size": 102,
+      "active_customers": 52,
+      "retention_rate": 0.5098
+    },
+    {
+      "cohort_month": "2024-11",
+      "month_number": 5,
+      "cohort_size": 102,
+      "active_customers": 51,
+      "retention_rate": 0.5
+    },
+    {
+      "cohort_month": "2024-12",
+      "month_number": 0,
+      "cohort_size": 94,
+      "active_customers": 51,
+      "retention_rate": 0.5426
+    },
+    {
+      "cohort_month": "2024-12",
+      "month_number": 1,
+      "cohort_size": 94,
+      "active_customers": 45,
+      "retention_rate": 0.4787
+    },
+    {
+      "cohort_month": "2024-12",
+      "month_number": 2,
+      "cohort_size": 94,
+      "active_customers": 42,
+      "retention_rate": 0.4468
+    },
+    {
+      "cohort_month": "2024-12",
+      "month_number": 3,
+      "cohort_size": 94,
+      "active_customers": 52,
+      "retention_rate": 0.5532
+    },
+    {
+      "cohort_month": "2024-12",
+      "month_number": 4,
+      "cohort_size": 94,
+      "active_customers": 58,
+      "retention_rate": 0.617
+    },
+    {
+      "cohort_month": "2024-12",
+      "month_number": 5,
+      "cohort_size": 94,
+      "active_customers": 52,
+      "retention_rate": 0.5532
+    }
+  ],
+  "revenueForecast": [
+    {
+      "month": "2025-07",
+      "forecast_revenue": 355218.59,
+      "method": "six_month_linear_trend",
+      "note": "Directional planning estimate, not a production forecast"
+    },
+    {
+      "month": "2025-08",
+      "forecast_revenue": 364225.58,
+      "method": "six_month_linear_trend",
+      "note": "Directional planning estimate, not a production forecast"
+    },
+    {
+      "month": "2025-09",
+      "forecast_revenue": 373232.56,
+      "method": "six_month_linear_trend",
+      "note": "Directional planning estimate, not a production forecast"
+    }
+  ],
+  "validation": [
+    {
+      "check_name": "stg_orders.order_id unique",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "stg_customers.customer_id unique",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "1200"
+    },
+    {
+      "check_name": "stg_orders.customer_id not null",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "stg_orders.order_date not null",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "stg_orders.customer_id exists in stg_customers",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "stg_orders.revenue non-negative",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "stg_orders.cost non-negative",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "stg_orders.discount_rate between 0 and 0.5",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "fact_orders.margin_rate between 0 and 0.8",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
+    },
+    {
+      "check_name": "stg_orders.fulfillment_days between 1 and 14",
+      "status": "pass",
+      "failed_rows": "0",
+      "total_rows": "13526"
     }
   ]
 }

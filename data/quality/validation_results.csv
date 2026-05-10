@@ -1,0 +1,11 @@
+check_name,status,failed_rows,total_rows
+stg_orders.order_id unique,pass,0,13526
+stg_customers.customer_id unique,pass,0,1200
+stg_orders.customer_id not null,pass,0,13526
+stg_orders.order_date not null,pass,0,13526
+stg_orders.customer_id exists in stg_customers,pass,0,13526
+stg_orders.revenue non-negative,pass,0,13526
+stg_orders.cost non-negative,pass,0,13526
+stg_orders.discount_rate between 0 and 0.5,pass,0,13526
+fact_orders.margin_rate between 0 and 0.8,pass,0,13526
+stg_orders.fulfillment_days between 1 and 14,pass,0,13526

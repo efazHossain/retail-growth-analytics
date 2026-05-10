@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-05-10T02:47:12.541Z",
+  "models": [
+    "dim_customers",
+    "dim_categories",
+    "fact_orders",
+    "mart_monthly_revenue",
+    "mart_channel_performance",
+    "mart_regional_margin",
+    "mart_category_performance",
+    "mart_cohort_retention",
+    "mart_revenue_forecast"
+  ]
+}

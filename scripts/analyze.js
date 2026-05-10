@@ -1,132 +1,87 @@
 import fs from "node:fs";
 import path from "node:path";
+import { ensureDir, readCsv, writeJson } from "./lib/csv.js";
+import { money, round, sum } from "./lib/metrics.js";
 
-const rawDir = path.join("data", "raw");
 const processedDir = path.join("data", "processed");
-fs.mkdirSync(processedDir, { recursive: true });
+ensureDir(processedDir);
 
-function parseCsv(filePath) {
-  const [headerLine, ...lines] = fs.readFileSync(filePath, "utf8").trim().split(/\r?\n/);
-  const headers = headerLine.split(",");
-  return lines.map((line) => {
-    const values = line.split(",");
-    return Object.fromEntries(headers.map((header, index) => [header, values[index]]));
-  });
-}
-
-const orders = parseCsv(path.join(rawDir, "orders.csv")).map((row) => ({
-  ...row,
-  units: Number(row.units),
-  revenue: Number(row.revenue),
-  cost: Number(row.cost),
-  discount_rate: Number(row.discount_rate),
-  fulfillment_days: Number(row.fulfillment_days),
-  month: row.order_date.slice(0, 7),
-  profit: Number((Number(row.revenue) - Number(row.cost)).toFixed(2))
-}));
-
-function groupBy(rows, keyFn, metricFn) {
-  const map = new Map();
-  for (const row of rows) {
-    const key = keyFn(row);
-    if (!map.has(key)) {
-      map.set(key, metricFn());
-    }
-    metricFn(map.get(key), row);
-  }
-  return [...map.values()];
-}
+const monthly = numericRows(readCsv(path.join("data", "marts", "mart_monthly_revenue.csv")));
+const byCategory = numericRows(readCsv(path.join("data", "marts", "mart_category_performance.csv")));
+const byChannel = numericRows(readCsv(path.join("data", "marts", "mart_channel_performance.csv")));
+const byRegion = numericRows(readCsv(path.join("data", "marts", "mart_regional_margin.csv")));
+const cohortRetention = numericRows(readCsv(path.join("data", "marts", "mart_cohort_retention.csv")));
+const revenueForecast = numericRows(readCsv(path.join("data", "marts", "mart_revenue_forecast.csv")));
+const validation = readCsv(path.join("data", "quality", "validation_results.csv"));
 
 const kpis = {
-  orders: orders.length,
-  revenue: sum(orders, "revenue"),
-  profit: sum(orders, "profit"),
-  average_order_value: Number((sum(orders, "revenue") / orders.length).toFixed(2)),
-  gross_margin_rate: Number((sum(orders, "profit") / sum(orders, "revenue")).toFixed(3)),
-  average_fulfillment_days: Number((sum(orders, "fulfillment_days") / orders.length).toFixed(1))
+  orders: sum(monthly, "orders"),
+  customers: Math.max(...monthly.map((row) => row.customers)),
+  revenue: sum(monthly, "revenue"),
+  profit: sum(monthly, "profit"),
+  average_order_value: round(sum(monthly, "revenue") / sum(monthly, "orders")),
+  gross_margin_rate: round(sum(monthly, "profit") / sum(monthly, "revenue"), 4),
+  average_fulfillment_days: round(monthly.reduce((total, row) => total + row.avg_fulfillment_days, 0) / monthly.length, 2),
+  validation_pass_rate: round(validation.filter((row) => row.status === "pass").length / validation.length, 4)
 };
 
-const monthly = groupBy(
-  orders,
-  (row) => row.month,
-  (acc, row) => {
-    if (!acc) return { month: "", orders: 0, revenue: 0, profit: 0, units: 0 };
-    acc.month = row.month;
-    acc.orders += 1;
-    acc.revenue += row.revenue;
-    acc.profit += row.profit;
-    acc.units += row.units;
-  }
-).map(roundMetrics).sort((a, b) => a.month.localeCompare(b.month));
+const summary = {
+  kpis,
+  monthly,
+  byCategory,
+  byChannel,
+  byRegion,
+  cohortRetention,
+  revenueForecast,
+  validation
+};
 
-const byCategory = summarizeBy("category");
-const byChannel = summarizeBy("channel");
-const byRegion = summarizeBy("region");
-const markdown = buildMarkdown({ kpis, monthly, byCategory, byChannel, byRegion });
-
-fs.writeFileSync(path.join(processedDir, "summary.json"), JSON.stringify({ kpis, monthly, byCategory, byChannel, byRegion }, null, 2));
-fs.writeFileSync(path.join(processedDir, "executive-summary.md"), markdown);
+writeJson(path.join(processedDir, "summary.json"), summary);
+writeExecutiveSummary(summary);
 console.log("Wrote data/processed/summary.json and executive-summary.md.");
 
-function summarizeBy(field) {
-  return groupBy(
-    orders,
-    (row) => row[field],
-    (acc, row) => {
-      if (!acc) return { [field]: "", orders: 0, revenue: 0, profit: 0, units: 0, avg_discount: 0 };
-      acc[field] = row[field];
-      acc.orders += 1;
-      acc.revenue += row.revenue;
-      acc.profit += row.profit;
-      acc.units += row.units;
-      acc.avg_discount += row.discount_rate;
-    }
-  )
-    .map((row) => ({
-      ...roundMetrics(row),
-      avg_discount: Number((row.avg_discount / row.orders).toFixed(3)),
-      margin_rate: Number((row.profit / row.revenue).toFixed(3))
-    }))
-    .sort((a, b) => b.revenue - a.revenue);
-}
-
-function sum(rows, field) {
-  return Number(rows.reduce((total, row) => total + row[field], 0).toFixed(2));
-}
-
-function roundMetrics(row) {
-  return Object.fromEntries(
-    Object.entries(row).map(([key, value]) => [key, typeof value === "number" ? Number(value.toFixed(2)) : value])
+function numericRows(rows) {
+  return rows.map((row) =>
+    Object.fromEntries(
+      Object.entries(row).map(([key, value]) => {
+        const asNumber = Number(value);
+        return value !== "" && !Number.isNaN(asNumber) ? [key, asNumber] : [key, value];
+      })
+    )
   );
 }
 
-function money(value) {
-  return `$${Math.round(value).toLocaleString()}`;
-}
-
-function buildMarkdown({ kpis, monthly, byCategory, byChannel, byRegion }) {
+function writeExecutiveSummary({ kpis, monthly, byCategory, byChannel, byRegion, cohortRetention, revenueForecast }) {
   const latest = monthly.at(-1);
   const previous = monthly.at(-2);
   const growth = ((latest.revenue - previous.revenue) / previous.revenue) * 100;
   const topCategory = byCategory[0];
-  const weakestRegion = [...byRegion].sort((a, b) => a.margin_rate - b.margin_rate)[0];
+  const weakestRegion = byRegion[0];
   const topChannel = byChannel[0];
+  const monthOneRetention = cohortRetention.filter((row) => row.month_number === 1);
+  const avgMonthOneRetention = monthOneRetention.reduce((total, row) => total + row.retention_rate, 0) / monthOneRetention.length;
+  const firstForecast = revenueForecast[0];
 
-  return `# Executive Summary
+  const markdown = `# Executive Summary
 
-Revenue reached ${money(kpis.revenue)} across ${kpis.orders.toLocaleString()} orders, with a ${Math.round(kpis.gross_margin_rate * 100)}% gross margin rate and ${money(kpis.average_order_value)} average order value.
+Revenue reached ${money(kpis.revenue)} across ${kpis.orders.toLocaleString()} orders, with a ${(kpis.gross_margin_rate * 100).toFixed(1)}% gross margin rate and ${money(kpis.average_order_value)} average order value.
 
 ## Business Findings
 
 - Latest monthly revenue was ${money(latest.revenue)}, ${growth.toFixed(1)}% versus the prior month.
 - ${topCategory.category} is the largest category by revenue at ${money(topCategory.revenue)}.
-- ${topChannel.channel} is the largest channel, but discounting should be monitored because channel mix can compress margin.
+- ${topChannel.channel} is the largest channel at ${money(topChannel.revenue)} in revenue.
 - ${weakestRegion.region} has the lowest margin rate at ${(weakestRegion.margin_rate * 100).toFixed(1)}%, making it the first region to investigate for pricing, fulfillment cost, or discount leakage.
+- Month-one cohort retention averages ${(avgMonthOneRetention * 100).toFixed(1)}%, adding a customer behavior lens beyond basic sales reporting.
+- A simple six-month trend forecast estimates ${money(firstForecast.forecast_revenue)} in revenue for ${firstForecast.month}.
 
 ## Recommended Actions
 
 1. Protect margin by reviewing discount rules in lower-margin regions and marketplace orders.
 2. Allocate campaign budget toward the highest-margin category and channel combinations.
 3. Track fulfillment days as an operational KPI because slower delivery can weaken repeat purchase behavior.
+4. Keep the trend forecast as a planning signal, but validate it against future actuals before using it for decisions.
 `;
+
+  fs.writeFileSync(path.join(processedDir, "executive-summary.md"), markdown);
 }
