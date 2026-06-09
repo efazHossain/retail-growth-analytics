@@ -71,6 +71,136 @@ node dashboard/server.js
 
 Then open `http://localhost:4173`.
 
+## Full-Stack Architecture Roadmap
+
+This repository is being extended into a cloud-ready Retail Intelligence Platform while keeping the existing analytics pipeline intact. Phase 1 adds a minimal full-stack scaffold without replacing the current CSV marts or static dashboard.
+
+```mermaid
+flowchart LR
+  user[User] --> frontend[React + TypeScript Frontend]
+  frontend --> api[Express API Gateway]
+  api --> postgres[(Postgres)]
+  api --> analytics[FastAPI Analytics Service]
+  postgres -. "Phase 2 seed loader" .-> marts[Existing CSV Marts]
+  analytics -. "Phase 2 analytics reuse" .-> marts
+```
+
+Phase 1 services:
+
+- `apps/frontend`: React, TypeScript, and Material UI app shell
+- `apps/api`: Express API gateway with health, dashboard, and analytics routes
+- `services/analytics`: FastAPI service with health and placeholder business summary route
+- `infra/postgres`: local Postgres schema and mart seed loader
+
+To start the full-stack scaffold locally:
+
+```powershell
+docker compose up --build
+```
+
+Then open:
+
+- Frontend: `http://localhost:5173`
+- API health: `http://localhost:3000/health`
+- Dashboard summary: `http://localhost:3000/api/dashboard/summary`
+- Analytics proxy/placeholder: `http://localhost:3000/api/analytics/health`
+- Analytics service health: `http://localhost:8000/health`
+- Analytics business summary: `http://localhost:8000/analytics/business-summary`
+
+More details are in [Full-stack architecture roadmap](docs/full-stack-architecture.md).
+
+### Phase 2 Data Serving Layer
+
+Phase 2 adds a Postgres-backed API over the existing mart CSVs. The CSV pipeline still owns data generation and mart creation; Postgres is the local serving layer for the Express API.
+
+Start the database, load the marts, and run the API:
+
+```powershell
+docker compose up -d postgres
+docker compose --profile seed run --rm seed
+docker compose up -d --build api
+```
+
+Available dashboard data endpoints:
+
+- `GET /api/dashboard/summary`
+- `GET /api/dashboard/revenue?limit=6`
+- `GET /api/dashboard/categories?limit=5`
+- `GET /api/dashboard/regions?region=Midwest`
+- `GET /api/dashboard/channels?channel=Online`
+- `GET /api/dashboard/cohorts?month=2024-01`
+- `GET /api/dashboard/forecast?limit=6`
+- `GET /api/dashboard/anomalies?limit=10`
+
+PowerShell smoke checks:
+
+```powershell
+Invoke-RestMethod http://localhost:3000/health
+Invoke-RestMethod http://localhost:3000/api/dashboard/summary
+Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?limit=6"
+Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?limit=6"
+```
+
+See [Data serving layer](docs/data-serving-layer.md) for schema and seed details.
+
+### Phase 3 Executive Dashboard
+
+The React frontend now includes a Postgres-backed executive dashboard that calls the Phase 2 API endpoints. Recharts is used for lightweight React charts because the scaffold did not previously include a charting library.
+
+Run the full local stack:
+
+```powershell
+docker compose up -d postgres
+docker compose --profile seed run --rm seed
+docker compose up -d --build api frontend
+```
+
+Then open `http://localhost:5173`.
+
+Frontend environment:
+
+- `VITE_API_BASE_URL`: base URL for the Node API; defaults to `http://localhost:3000`
+
+The executive dashboard consumes:
+
+- `GET /api/dashboard/summary`
+- `GET /api/dashboard/revenue`
+- `GET /api/dashboard/categories`
+- `GET /api/dashboard/regions`
+- `GET /api/dashboard/channels`
+- `GET /api/dashboard/cohorts`
+- `GET /api/dashboard/forecast`
+- `GET /api/dashboard/anomalies`
+
+### Phase 4 Analyst Workspace
+
+The React frontend now includes an Analyst Workspace for interactive mart exploration. It reuses the Phase 2 API and applies filters to compatible endpoints:
+
+- `month`: revenue, cohort, forecast, and anomaly views
+- `category`: category performance
+- `region`: regional margin
+- `channel`: channel performance
+- `limit`: row counts for API-backed tables and charts
+
+Run the same local stack and open the Analyst tab:
+
+```powershell
+docker compose up -d postgres
+docker compose --profile seed run --rm seed
+docker compose up -d --build api frontend
+```
+
+API query examples:
+
+```powershell
+Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?month=2025-06"
+Invoke-RestMethod "http://localhost:3000/api/dashboard/categories?category=Electronics"
+Invoke-RestMethod "http://localhost:3000/api/dashboard/regions?region=Midwest"
+Invoke-RestMethod "http://localhost:3000/api/dashboard/channels?channel=Online"
+Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?month=2025-06"
+Invoke-RestMethod "http://localhost:3000/api/dashboard/anomalies?month=2025-06"
+```
+
 The full build runs:
 
 ```text

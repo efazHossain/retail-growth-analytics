@@ -1,0 +1,59 @@
+services:
+  frontend:
+    build:
+      context: ./apps/frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:3000
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./apps/api
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      API_PORT: 3000
+      ANALYTICS_SERVICE_URL: http://analytics:8000
+      DATABASE_URL: postgres://retail:retail@postgres:5432/retail_intelligence
+    depends_on:
+      - analytics
+      - postgres
+
+  analytics:
+    build:
+      context: ./services/analytics
+    ports:
+      - "8000:8000"
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: retail
+      POSTGRES_PASSWORD: retail
+      POSTGRES_DB: retail_intelligence
+    volumes:
+      - retail_postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/schema:/docker-entrypoint-initdb.d:ro
+
+  seed:
+    image: postgres:16-alpine
+    profiles:
+      - seed
+    environment:
+      DATABASE_URL: postgres://retail:retail@postgres:5432/retail_intelligence
+    volumes:
+      - ./data/marts:/marts:ro
+      - ./infra/postgres/schema:/schema:ro
+      - ./infra/postgres/seed:/seed:ro
+    depends_on:
+      - postgres
+    command: ["sh", "/seed/load_marts.sh"]
+
+volumes:
+  retail_postgres_data:

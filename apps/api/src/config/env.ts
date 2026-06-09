@@ -1,0 +1,11 @@
+import "dotenv/config";
+import { z } from "zod";
+
+const envSchema = z.object({
+  NODE_ENV: z.string().default("development"),
+  API_PORT: z.coerce.number().default(3000),
+  ANALYTICS_SERVICE_URL: z.string().url().default("http://analytics:8000"),
+  DATABASE_URL: z.string().default("postgres://retail:retail@postgres:5432/retail_intelligence")
+});
+
+export const env = envSchema.parse(process.env);
