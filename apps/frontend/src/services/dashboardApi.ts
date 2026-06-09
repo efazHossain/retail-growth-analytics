@@ -1,3 +1,5 @@
+import { authStorageKey } from "./authApi";
+
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000";
 
 export type ApiEnvelope<T> = {
@@ -112,6 +114,14 @@ export type ExecutiveDashboardData = {
   cohorts: CohortRow[];
   forecast: ForecastData;
   anomalies: AnomalyRow[];
+  analyticsSummary: AnalyticsBusinessSummary | null;
+};
+
+export type AnalyticsBusinessSummary = {
+  summary: string;
+  highlights: string[];
+  risks: string[];
+  recommended_actions: string[];
 };
 
 export type AnalystFilters = {
@@ -142,7 +152,9 @@ export type AnalystWorkspaceData = {
 
 async function request<T>(path: string): Promise<T> {
   const url = `${apiBaseUrl}${path}`;
-  const response = await fetch(url);
+  const token = localStorage.getItem(authStorageKey);
+  const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+  const response = await fetch(url, { headers });
 
   if (!response.ok) {
     throw new Error(`API request failed for ${url}: ${response.status} ${response.statusText}`);
@@ -154,6 +166,14 @@ async function request<T>(path: string): Promise<T> {
   }
 
   return payload.data;
+}
+
+async function optionalRequest<T>(path: string): Promise<T | null> {
+  try {
+    return await request<T>(path);
+  } catch {
+    return null;
+  }
 }
 
 function buildQuery(params: Record<string, string | number | undefined>) {
@@ -168,7 +188,7 @@ function buildQuery(params: Record<string, string | number | undefined>) {
 }
 
 export async function getExecutiveDashboardData(): Promise<ExecutiveDashboardData> {
-  const [summary, revenue, categories, regions, channels, cohorts, forecast, anomalies] = await Promise.all([
+  const [summary, revenue, categories, regions, channels, cohorts, forecast, anomalies, analyticsSummary] = await Promise.all([
     request<DashboardSummary>("/api/dashboard/summary"),
     request<RevenueRow[]>("/api/dashboard/revenue?limit=18"),
     request<CategoryRow[]>("/api/dashboard/categories?limit=10"),
@@ -176,7 +196,8 @@ export async function getExecutiveDashboardData(): Promise<ExecutiveDashboardDat
     request<ChannelRow[]>("/api/dashboard/channels?limit=10"),
     request<CohortRow[]>("/api/dashboard/cohorts?limit=36"),
     request<ForecastData>("/api/dashboard/forecast?limit=12"),
-    request<AnomalyRow[]>("/api/dashboard/anomalies?limit=12")
+    request<AnomalyRow[]>("/api/dashboard/anomalies?limit=12"),
+    optionalRequest<AnalyticsBusinessSummary>("/api/analytics/business-summary")
   ]);
 
   return {
@@ -187,7 +208,8 @@ export async function getExecutiveDashboardData(): Promise<ExecutiveDashboardDat
     channels: channels ?? [],
     cohorts: cohorts ?? [],
     forecast: forecast ?? { accuracy: [], backtest: [] },
-    anomalies: anomalies ?? []
+    anomalies: anomalies ?? [],
+    analyticsSummary
   };
 }
 

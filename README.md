@@ -135,10 +135,13 @@ Available dashboard data endpoints:
 PowerShell smoke checks:
 
 ```powershell
+$login = Invoke-RestMethod http://localhost:3000/api/auth/login -Method Post -ContentType "application/json" -Body '{"username":"analyst","password":"AnalystDemo123!"}'
+$headers = @{ Authorization = "Bearer $($login.data.accessToken)" }
+
 Invoke-RestMethod http://localhost:3000/health
-Invoke-RestMethod http://localhost:3000/api/dashboard/summary
-Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?limit=6"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?limit=6"
+Invoke-RestMethod http://localhost:3000/api/dashboard/summary -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?limit=6" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?limit=6" -Headers $headers
 ```
 
 See [Data serving layer](docs/data-serving-layer.md) for schema and seed details.
@@ -193,13 +196,76 @@ docker compose up -d --build api frontend
 API query examples:
 
 ```powershell
-Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?month=2025-06"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/categories?category=Electronics"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/regions?region=Midwest"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/channels?channel=Online"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?month=2025-06"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/anomalies?month=2025-06"
+$login = Invoke-RestMethod http://localhost:3000/api/auth/login -Method Post -ContentType "application/json" -Body '{"username":"analyst","password":"AnalystDemo123!"}'
+$headers = @{ Authorization = "Bearer $($login.data.accessToken)" }
+
+Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?month=2025-06" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/categories?category=Electronics" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/regions?region=Midwest" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/channels?channel=Online" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?month=2025-06" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/anomalies?month=2025-06" -Headers $headers
 ```
+
+### Phase 5 Python Analytics Service
+
+The FastAPI analytics service now reads the existing CSV marts and exposes forecast accuracy, anomaly, KPI, trend, and business summary endpoints. The Node API gateway proxies these routes under `/api/analytics/*`, and the Executive Dashboard includes a small analytics summary panel when the service is available.
+
+Phase 5 intentionally keeps the service CSV-first instead of adding another database dependency to Python. Postgres remains the dashboard serving layer; FastAPI focuses on reusable analytics calculations over the mart files.
+
+Run the local stack:
+
+```powershell
+docker compose up -d postgres
+docker compose --profile seed run --rm seed
+docker compose up -d --build analytics api frontend
+```
+
+Analytics endpoints:
+
+```powershell
+Invoke-RestMethod http://localhost:8000/health
+Invoke-RestMethod http://localhost:8000/analytics/forecast-accuracy
+Invoke-RestMethod http://localhost:8000/analytics/anomalies
+Invoke-RestMethod http://localhost:8000/analytics/business-summary
+Invoke-RestMethod http://localhost:8000/analytics/kpis
+Invoke-RestMethod http://localhost:8000/analytics/trends
+```
+
+Gateway proxy endpoints:
+
+```powershell
+Invoke-RestMethod http://localhost:3000/api/analytics/health
+Invoke-RestMethod http://localhost:3000/api/analytics/business-summary
+Invoke-RestMethod http://localhost:3000/api/analytics/kpis
+Invoke-RestMethod http://localhost:3000/api/analytics/trends
+```
+
+See [Analytics service](docs/analytics-service.md) for service notes and validation commands.
+
+### Phase 6 Auth, RBAC, and Security
+
+The Node API gateway now protects dashboard and analytics routes with JWT authentication and role checks. The React frontend includes a local demo login screen, token-backed auth state, protected views, role-aware navigation, and client-side logout.
+
+Demo users:
+
+| Username | Password | Role |
+| --- | --- | --- |
+| `admin` | `AdminDemo123!` | `admin` |
+| `analyst` | `AnalystDemo123!` | `analyst` |
+| `executive` | `ExecutiveDemo123!` | `executive` |
+
+Auth smoke checks:
+
+```powershell
+$login = Invoke-RestMethod http://localhost:3000/api/auth/login -Method Post -ContentType "application/json" -Body '{"username":"analyst","password":"AnalystDemo123!"}'
+$headers = @{ Authorization = "Bearer $($login.data.accessToken)" }
+Invoke-RestMethod http://localhost:3000/api/auth/me -Headers $headers
+Invoke-RestMethod http://localhost:3000/api/dashboard/summary -Headers $headers
+Invoke-RestMethod http://localhost:3000/api/analytics/trends -Headers $headers
+```
+
+Missing tokens now return `401` for protected API routes, while role-restricted routes return `403`. Health endpoints remain public. See [Security and RBAC](docs/security.md) for the role matrix and production tradeoffs.
 
 The full build runs:
 
@@ -254,6 +320,8 @@ Python outputs are written to `python/outputs/`.
 - [Metrics definition](docs/metrics-definition.md)
 - [Data quality](docs/data-quality.md)
 - [Anomaly detection](docs/anomaly-detection.md)
+- [Analytics service](docs/analytics-service.md)
+- [Security and RBAC](docs/security.md)
 - [Orchestration](docs/orchestration.md)
 - [Analytics questions](docs/analytics-questions.md)
 - [Findings](docs/findings.md)

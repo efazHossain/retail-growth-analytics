@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
+import AnalyticsSummaryPanel from "../components/dashboard/AnalyticsSummaryPanel";
 import AnomalyAlertsPanel from "../components/dashboard/AnomalyAlertsPanel";
 import CategoryPerformanceTable from "../components/dashboard/CategoryPerformanceTable";
 import ChannelPerformanceChart from "../components/dashboard/ChannelPerformanceChart";
@@ -49,7 +50,7 @@ export default function ExecutiveDashboard() {
   if (state.status === "loading") return <LoadingState />;
   if (state.status === "error") return <ErrorState message={state.message} />;
 
-  const { summary, revenue, categories, regions, channels, cohorts, forecast, anomalies } = state.data;
+  const { summary, revenue, categories, regions, channels, cohorts, forecast, anomalies, analyticsSummary } = state.data;
   const kpis = summary.kpis ?? {
     revenue: 0,
     profit: 0,
@@ -123,6 +124,8 @@ export default function ExecutiveDashboard() {
           <AnomalyAlertsPanel rows={anomalies} />
         </Grid>
       </Grid>
+
+      <AnalyticsSummaryPanel summary={analyticsSummary} />
 
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>

@@ -5,6 +5,7 @@ export const errorHandler: ErrorRequestHandler = (error, _request, response, _ne
 
   response.status(500).json({
     status: "error",
-    message: "Unexpected API error"
+    message: "Unexpected API error",
+    stack: process.env.NODE_ENV === "production" ? undefined : error.stack
   });
 };
