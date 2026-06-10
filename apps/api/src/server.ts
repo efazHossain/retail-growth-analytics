@@ -8,12 +8,14 @@ import { dashboardRouter } from "./routes/dashboard.js";
 import { healthRouter } from "./routes/health.js";
 import { insightsRouter } from "./routes/insights.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+import { requestLogger } from "./middleware/requestLogger.js";
 
 const app = express();
 const corsOrigin = env.CORS_ORIGIN === "*" ? true : env.CORS_ORIGIN.split(",").map((origin) => origin.trim());
 
 app.use(helmet());
 app.use(cors({ origin: corsOrigin }));
+app.use(requestLogger);
 app.use(express.json());
 app.use(healthRouter);
 app.use(authRouter);

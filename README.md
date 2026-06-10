@@ -287,6 +287,39 @@ Invoke-RestMethod http://localhost:3000/api/insights/ask -Method Post -Headers $
 
 The React frontend includes an Insights Assistant page with suggested questions, loading and error states, structured evidence, and recommended actions. See [AI Insights](docs/ai-insights.md) for provider architecture, supported prompts, and future LLM integration notes.
 
+### Phase 8 Observability, CI/CD, and Cloud Architecture
+
+Phase 8 adds interview-ready operational scaffolding without deploying cloud infrastructure. The local stack now includes Docker health checks, structured request logging, request IDs, public status endpoints, a smoke-check script, expanded GitHub Actions validation, and AWS target architecture documentation.
+
+Operational endpoints:
+
+- API health: `GET http://localhost:3000/health`
+- API dependency status: `GET http://localhost:3000/status`
+- API dependency status alias: `GET http://localhost:3000/api/status`
+- Analytics health: `GET http://localhost:8000/health`
+- Analytics mart status: `GET http://localhost:8000/status`
+
+Local validation:
+
+```powershell
+docker compose config
+docker compose up -d --build postgres analytics api frontend
+docker compose --profile seed run --rm seed
+.\scripts\smoke-health.ps1
+docker compose ps
+```
+
+Build checks:
+
+```powershell
+docker compose run --rm --no-deps api npm run build
+docker compose run --rm --no-deps frontend npm run build
+```
+
+The GitHub Actions workflow validates Docker Compose config, the legacy analytics build, the Node API build, the React frontend build, FastAPI app imports, and the Python analysis layer. The AWS documentation describes a target design using ECS/Fargate, RDS Postgres, S3, CloudWatch, Secrets Manager or Parameter Store, and an Application Load Balancer. It is an architecture plan only, not a live deployment.
+
+See [Observability, CI/CD, and Cloud Architecture](docs/observability-cicd-cloud.md) for diagrams, tradeoffs, and the future Terraform plan.
+
 The full build runs:
 
 ```text
@@ -343,6 +376,7 @@ Python outputs are written to `python/outputs/`.
 - [Analytics service](docs/analytics-service.md)
 - [Security and RBAC](docs/security.md)
 - [AI Insights](docs/ai-insights.md)
+- [Observability, CI/CD, and Cloud Architecture](docs/observability-cicd-cloud.md)
 - [Orchestration](docs/orchestration.md)
 - [Analytics questions](docs/analytics-questions.md)
 - [Findings](docs/findings.md)

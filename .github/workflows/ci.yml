@@ -1,11 +1,11 @@
-name: Validate Analytics Pipeline
+name: Validate Retail Intelligence Platform
 
 on:
   push:
   pull_request:
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,18 +15,38 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: "20"
 
-      - name: Run analytics build
+      - name: Validate Docker Compose config
+        run: docker compose config
+
+      - name: Run legacy analytics build
         run: node scripts/build.js
+
+      - name: Build Node API
+        working-directory: apps/api
+        run: |
+          npm install
+          npm run build
+
+      - name: Build React frontend
+        working-directory: apps/frontend
+        run: |
+          npm install
+          npm run build
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Run Python analysis layer
+      - name: Validate FastAPI analytics imports
         run: |
           python -m pip install --upgrade pip
+          python -m pip install -r services/analytics/requirements.txt
+          PYTHONPATH=services/analytics python -c "from app.main import app; print(app.title)"
+
+      - name: Run Python analysis layer
+        run: |
           python -m pip install pandas
           PYTHONPATH=python python python/run_all.py
