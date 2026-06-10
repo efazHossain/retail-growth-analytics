@@ -57,21 +57,29 @@ docker compose up -d --build api
 Examples:
 
 ```powershell
-Invoke-RestMethod http://localhost:3000/api/dashboard/summary
-Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?limit=6"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/categories?limit=5"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/regions?region=Midwest"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/channels?channel=Online"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/cohorts?month=2024-01"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?limit=6"
-Invoke-RestMethod "http://localhost:3000/api/dashboard/anomalies?limit=10"
+$login = Invoke-RestMethod http://localhost:3000/api/auth/login -Method Post -ContentType "application/json" -Body '{"username":"analyst","password":"AnalystDemo123!"}'
+$headers = @{ Authorization = "Bearer $($login.data.accessToken)" }
+
+Invoke-RestMethod http://localhost:3000/api/dashboard/summary -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/revenue?limit=6" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/categories?limit=5" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/regions?region=Midwest" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/channels?channel=Online" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/cohorts?month=2024-01" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/forecast?limit=6" -Headers $headers
+Invoke-RestMethod "http://localhost:3000/api/dashboard/anomalies?limit=10" -Headers $headers
 ```
 
 Equivalent curl examples:
 
 ```bash
-curl http://localhost:3000/api/dashboard/summary
-curl "http://localhost:3000/api/dashboard/revenue?limit=6"
-curl "http://localhost:3000/api/dashboard/categories?limit=5"
-curl "http://localhost:3000/api/dashboard/forecast?limit=6"
+TOKEN=$(curl -s http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"analyst","password":"AnalystDemo123!"}' \
+  | node -e "let body=''; process.stdin.on('data', d => body += d); process.stdin.on('end', () => console.log(JSON.parse(body).data.accessToken));")
+
+curl -H "Authorization: Bearer $TOKEN" http://localhost:3000/api/dashboard/summary
+curl -H "Authorization: Bearer $TOKEN" "http://localhost:3000/api/dashboard/revenue?limit=6"
+curl -H "Authorization: Bearer $TOKEN" "http://localhost:3000/api/dashboard/categories?limit=5"
+curl -H "Authorization: Bearer $TOKEN" "http://localhost:3000/api/dashboard/forecast?limit=6"
 ```

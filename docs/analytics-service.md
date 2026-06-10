@@ -29,9 +29,13 @@ The service reads `MARTS_DIR`, defaulting to the repository `data/marts` folder 
 docker compose up -d --build analytics api
 Invoke-RestMethod http://localhost:8000/health
 Invoke-RestMethod http://localhost:8000/analytics/business-summary
+
+$login = Invoke-RestMethod http://localhost:3000/api/auth/login -Method Post -ContentType "application/json" -Body '{"username":"analyst","password":"AnalystDemo123!"}'
+$headers = @{ Authorization = "Bearer $($login.data.accessToken)" }
+
 Invoke-RestMethod http://localhost:3000/api/analytics/health
-Invoke-RestMethod http://localhost:3000/api/analytics/kpis
-Invoke-RestMethod http://localhost:3000/api/analytics/trends
+Invoke-RestMethod http://localhost:3000/api/analytics/kpis -Headers $headers
+Invoke-RestMethod http://localhost:3000/api/analytics/trends -Headers $headers
 ```
 
 ## Future Work

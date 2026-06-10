@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -11,12 +12,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AnalystWorkspace from "./pages/AnalystWorkspace";
 import ExecutiveDashboard from "./pages/ExecutiveDashboard";
+import InsightsAssistant from "./pages/InsightsAssistant";
 import LoginPage from "./pages/LoginPage";
 import ForbiddenState from "./components/common/ForbiddenState";
 import LoadingState from "./components/common/LoadingState";
 import { useAuth } from "./services/authContext";
 
-type View = "executive" | "analyst";
+type View = "executive" | "analyst" | "insights";
 
 function canUseAnalystWorkspace(role: string | undefined) {
   return role === "admin" || role === "analyst";
@@ -67,6 +69,13 @@ export default function App() {
                 Analyst
               </Button>
             ) : null}
+            <Button
+              startIcon={<AutoAwesomeOutlinedIcon />}
+              variant={view === "insights" ? "contained" : "text"}
+              onClick={() => setView("insights")}
+            >
+              Insights
+            </Button>
             <Button onClick={logout}>Logout</Button>
           </Stack>
         </Toolbar>
@@ -74,6 +83,7 @@ export default function App() {
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {view === "executive" ? <ExecutiveDashboard /> : null}
         {view === "analyst" && canViewAnalyst ? <AnalystWorkspace /> : null}
+        {view === "insights" ? <InsightsAssistant /> : null}
         {view === "analyst" && !canViewAnalyst ? (
           <ForbiddenState message="Your role can view the executive dashboard, but the Analyst Workspace requires an analyst or admin role." />
         ) : null}

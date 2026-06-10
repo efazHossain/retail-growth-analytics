@@ -235,10 +235,13 @@ Invoke-RestMethod http://localhost:8000/analytics/trends
 Gateway proxy endpoints:
 
 ```powershell
+$login = Invoke-RestMethod http://localhost:3000/api/auth/login -Method Post -ContentType "application/json" -Body '{"username":"analyst","password":"AnalystDemo123!"}'
+$headers = @{ Authorization = "Bearer $($login.data.accessToken)" }
+
 Invoke-RestMethod http://localhost:3000/api/analytics/health
-Invoke-RestMethod http://localhost:3000/api/analytics/business-summary
-Invoke-RestMethod http://localhost:3000/api/analytics/kpis
-Invoke-RestMethod http://localhost:3000/api/analytics/trends
+Invoke-RestMethod http://localhost:3000/api/analytics/business-summary -Headers $headers
+Invoke-RestMethod http://localhost:3000/api/analytics/kpis -Headers $headers
+Invoke-RestMethod http://localhost:3000/api/analytics/trends -Headers $headers
 ```
 
 See [Analytics service](docs/analytics-service.md) for service notes and validation commands.
@@ -266,6 +269,23 @@ Invoke-RestMethod http://localhost:3000/api/analytics/trends -Headers $headers
 ```
 
 Missing tokens now return `401` for protected API routes, while role-restricted routes return `403`. Health endpoints remain public. See [Security and RBAC](docs/security.md) for the role matrix and production tradeoffs.
+
+### Phase 7 AI Insights
+
+The API now includes a secure AI-style insights layer with a deterministic `rule_based` provider. It answers common business questions using the existing Postgres-backed dashboard services and returns structured evidence, recommended actions, confidence, and provider metadata. No external LLM or API key is required for the MVP.
+
+Run an authenticated insight request:
+
+```powershell
+$login = Invoke-RestMethod http://localhost:3000/api/auth/login -Method Post -ContentType "application/json" -Body '{"username":"analyst","password":"AnalystDemo123!"}'
+$headers = @{ Authorization = "Bearer $($login.data.accessToken)" }
+
+Invoke-RestMethod http://localhost:3000/api/insights/health -Headers $headers
+Invoke-RestMethod http://localhost:3000/api/insights/suggestions -Headers $headers
+Invoke-RestMethod http://localhost:3000/api/insights/ask -Method Post -Headers $headers -ContentType "application/json" -Body '{"question":"Which category is underperforming?"}'
+```
+
+The React frontend includes an Insights Assistant page with suggested questions, loading and error states, structured evidence, and recommended actions. See [AI Insights](docs/ai-insights.md) for provider architecture, supported prompts, and future LLM integration notes.
 
 The full build runs:
 
@@ -322,6 +342,7 @@ Python outputs are written to `python/outputs/`.
 - [Anomaly detection](docs/anomaly-detection.md)
 - [Analytics service](docs/analytics-service.md)
 - [Security and RBAC](docs/security.md)
+- [AI Insights](docs/ai-insights.md)
 - [Orchestration](docs/orchestration.md)
 - [Analytics questions](docs/analytics-questions.md)
 - [Findings](docs/findings.md)

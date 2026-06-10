@@ -6,6 +6,7 @@ import { analyticsRouter } from "./routes/analytics.js";
 import { authRouter } from "./routes/auth.js";
 import { dashboardRouter } from "./routes/dashboard.js";
 import { healthRouter } from "./routes/health.js";
+import { insightsRouter } from "./routes/insights.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(healthRouter);
 app.use(authRouter);
 app.use(dashboardRouter);
 app.use(analyticsRouter);
+app.use(insightsRouter);
 app.use(errorHandler);
 
 app.listen(env.API_PORT, () => {

@@ -22,6 +22,7 @@ services:
       JWT_SECRET: dev-only-retail-intelligence-secret
       JWT_EXPIRES_IN: 1h
       CORS_ORIGIN: http://localhost:5173
+      INSIGHT_PROVIDER: rule_based
     depends_on:
       - analytics
       - postgres
