@@ -6,19 +6,19 @@ Retail Growth Analytics is an ongoing personal data analytics and analytics engi
 
 The project is built to answer a practical business question: how can a retail business grow revenue while protecting margin?
 
-## Dashboard Preview
+## Platform Preview
 
-### Overview
+### Executive Dashboard
 
-![Dashboard overview](docs/assets/01-dashboard-overview.png)
+![Executive dashboard](docs/assets/retail-platform-executive-dashboard.png)
 
-### Performance Views
+### Analyst Workspace
 
-![Performance views](docs/assets/02-performance-views.png)
+![Analyst workspace](docs/assets/retail-platform-analyst-workspace.png)
 
-### Advanced Analytics
+### Insights Assistant
 
-![Advanced analytics](docs/assets/03-advanced-analytics.png)
+![Insights assistant](docs/assets/retail-platform-insights-assistant.png)
 
 ## Python Analysis Preview
 
