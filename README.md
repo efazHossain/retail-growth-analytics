@@ -2,10 +2,42 @@
 
 [![Validate Analytics Pipeline](https://github.com/efazHossain/retail-growth-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/efazHossain/retail-growth-analytics/actions/workflows/ci.yml)
 
-Retail Growth Analytics is an ongoing personal data analytics and analytics engineering project. It simulates how raw retail transaction data moves through a trusted analytics workflow: generated source files, staging models, facts and dimensions, business marts, data quality checks, SQL-style analysis outputs, Python analysis, dashboard reporting, and written findings.
+Retail Growth Analytics is a full-stack Retail Intelligence Platform built on a reproducible analytics-engineering workflow. It takes generated retail transactions through staging, marts, quality checks, SQL-style analysis, Python forecasting, and anomaly detection, then serves those trusted marts through a React application, Express API, FastAPI analytics service, and Postgres.
 
-The project is built to answer a practical business question: how can a retail business grow revenue while protecting margin?
+The project answers a practical business question: how can a retail business grow revenue while protecting margin?
 
+## Platform At A Glance
+
+- Executive Dashboard for revenue, margin, channels, regions, cohorts, forecasts, and anomalies.
+- Analyst Workspace with safe filters and mart-level drilldowns.
+- Insights Assistant with deterministic, evidence-backed business answers and no required LLM key.
+- JWT demo authentication with role-aware API access.
+- Docker Compose, health checks, smoke validation, and an AWS target architecture plan.
+
+Read the [architecture case study](docs/case-study.md), [API reference](docs/api-reference.md), and [cloud architecture plan](docs/observability-cicd-cloud.md) for the design behind the product.
+
+## Run The Full-Stack Platform
+
+Prerequisites: Docker Desktop and Docker Compose. Node.js 20+ is only needed when you want to rebuild the legacy CSV pipeline. From the repository root:
+
+```powershell
+.\scripts\project.ps1 setup
+```
+
+This starts Postgres, FastAPI, the Node API, and the React frontend, loads the existing marts into Postgres, and runs health checks. Open `http://localhost:5173` and sign in with `analyst` / `AnalystDemo123!`.
+
+Useful commands:
+
+```powershell
+.\scripts\project.ps1 start        # start or rebuild the application services
+.\scripts\project.ps1 seed         # load existing marts into Postgres
+.\scripts\project.ps1 smoke        # verify the end-to-end local stack
+.\scripts\project.ps1 build        # validate legacy, Node, React, and FastAPI builds
+.\scripts\project.ps1 status       # display container health and status
+.\scripts\project.ps1 stop         # stop the local stack
+```
+
+The original static dashboard is still available through the legacy workflow below.
 ## Platform Preview
 
 ### Executive Dashboard
@@ -62,7 +94,7 @@ docs/               Documentation, findings, screenshots, lineage, and handoff n
 dbt/                dbt-style model and test scaffold for future conversion
 ```
 
-## Quick Start
+## Legacy Static Dashboard
 
 ```powershell
 node scripts/build.js
@@ -365,6 +397,8 @@ Python outputs are written to `python/outputs/`.
 
 ## Documentation
 
+- [Architecture case study](docs/case-study.md)
+- [API reference](docs/api-reference.md)
 - [Project summary](docs/project-summary.md)
 - [Data model](docs/data-model.md)
 - [Model catalog](docs/model-catalog.md)
